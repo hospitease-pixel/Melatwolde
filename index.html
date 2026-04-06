@@ -73,16 +73,62 @@
             z-index: 20;
             position: relative;
         }
+        
+        /* Edit Mode Styles */
+        .admin-editable {
+            cursor: pointer;
+            position: relative;
+        }
+        .admin-editable::after {
+            content: 'Click to Change';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            color: #FFFF00;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: inherit;
+            border: 2px dashed #FFFF00;
+        }
+        body.is-admin .admin-editable:hover::after {
+            display: flex;
+        }
+        
+        /* High Visibility Admin Button */
+        #adminLoginBtn {
+            box-shadow: 0 0 10px rgba(255, 255, 0, 0.3);
+            border: 1px solid #333;
+        }
+        #adminLoginBtn:hover {
+            box-shadow: 0 0 20px rgba(255, 255, 0, 0.6);
+            background-color: #222;
+        }
+        body.is-admin #adminLoginBtn {
+            color: #FFFF00;
+            border-color: #FFFF00;
+        }
     </style>
 </head>
 <body class="min-h-screen p-4 py-8">
+    <!-- Hidden Inputs for Image Upload -->
+    <input type="file" id="logoInput" accept="image/*" class="hidden">
+    <input type="file" id="profileInput" accept="image/*" class="hidden">
+
     <div id="messageBox" class="fixed top-4 left-1/2 -translate-x-1/2 p-3 rounded-lg text-sm text-center hidden z-50 transition-all duration-300 shadow-xl">
         Action completed.
     </div>
 
+    <!-- Admin Button - Made highly visible -->
+    <button id="adminLoginBtn" class="fixed bottom-6 right-6 z-50 w-12 h-12 bg-gray-900 text-gray-300 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95">
+        <i data-lucide="settings" class="w-6 h-6"></i>
+    </button>
+
     <div id="id-card-content" class="graph-pattern-background max-w-sm w-full mx-auto p-4 md:p-6 rounded-3xl border border-gray-800 shadow-[0_20px_50px_rgba(0,0,0,0.8)] relative overflow-hidden">
         <div class="wave-background absolute top-0 left-0 right-0 h-80 -mt-1 -mx-1 rounded-t-[1.5rem] flex justify-center items-center">
-            <div class="p-2 flex justify-center items-center z-10 w-full h-full">
+            <div class="p-2 flex justify-center items-center z-10 w-full h-full admin-editable" id="logoEditWrapper">
                 <img id="businessLogo" src="https://i.ibb.co/4R5wZ5yh/and-many-more.png" alt="And Many More Logo" onerror="this.onerror=null; this.src='https://placehold.co/400x400/010203/FFFF00?text=LOGO';">
             </div>
         </div>
@@ -98,7 +144,7 @@
 
         <div class="relative z-10">
             <div class="text-center mb-6 pt-64">
-                <div class="relative w-40 h-40 mx-auto rounded-full border-4 border-gray-900 shadow-2xl overflow-hidden profile-container">
+                <div class="relative w-40 h-40 mx-auto rounded-full border-4 border-gray-900 shadow-2xl overflow-hidden profile-container admin-editable" id="profileEditWrapper">
                     <img id="profilePicture" src="https://i.ibb.co/sGZVzgq/IMG-9715.jpg" alt="Melat Wolde" class="w-full h-full rounded-full object-cover">
                 </div>
                 <h1 id="contactName" class="text-2xl font-extrabold text-white mt-4">Melat Wolde</h1>
@@ -170,19 +216,107 @@
         </div>
     </div>
 
+    <!-- Admin Modal -->
+    <div id="adminModal" class="fixed inset-0 bg-black/80 z-[100] hidden flex items-center justify-center p-4">
+        <div class="bg-gray-900 p-6 rounded-2xl border border-gray-800 w-full max-w-xs text-center shadow-2xl">
+            <div class="w-12 h-12 bg-[#FFFF00] rounded-full flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="lock" class="text-black w-6 h-6"></i>
+            </div>
+            <h2 class="text-[#FFFF00] text-xl font-bold mb-4">Admin Login</h2>
+            <p class="text-gray-400 text-sm mb-6">Enter password to enable image editing</p>
+            <input type="password" id="adminPassword" placeholder="Enter Password" class="w-full p-3 bg-black border border-gray-700 rounded-xl text-white mb-6 focus:border-[#FFFF00] outline-none transition-colors text-center tracking-widest">
+            <div class="flex gap-3">
+                <button id="cancelLogin" class="flex-1 p-3 bg-gray-800 text-gray-400 font-bold rounded-xl hover:bg-gray-700 transition-colors">Cancel</button>
+                <button id="confirmLogin" class="flex-1 p-3 bg-[#FFFF00] text-black font-bold rounded-xl hover:bg-yellow-400 transition-colors shadow-lg shadow-yellow-900/20">Login</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         lucide.createIcons();
         const messageBox = document.getElementById('messageBox');
+        
         function showMessage(text) {
             messageBox.textContent = text;
             messageBox.classList.remove('hidden');
-            messageBox.classList.add('bg-gray-800', 'text-[#FFFF00]', 'border', 'border-[#FFFF00]');
-            setTimeout(() => { messageBox.classList.add('hidden'); }, 3000);
+            messageBox.classList.add('bg-gray-800', 'text-[#FFFF00]', 'border', 'border-[#FFFF00]', 'scale-100');
+            setTimeout(() => { 
+                messageBox.classList.add('hidden'); 
+            }, 3000);
         }
+
+        // Admin Logic
+        const adminLoginBtn = document.getElementById('adminLoginBtn');
+        const adminModal = document.getElementById('adminModal');
+        const adminPassword = document.getElementById('adminPassword');
+        const confirmLogin = document.getElementById('confirmLogin');
+        const cancelLogin = document.getElementById('cancelLogin');
+        const logoInput = document.getElementById('logoInput');
+        const profileInput = document.getElementById('profileInput');
+
+        adminLoginBtn.addEventListener('click', () => {
+            if (document.body.classList.contains('is-admin')) {
+                document.body.classList.remove('is-admin');
+                showMessage('Admin mode deactivated');
+                return;
+            }
+            adminModal.classList.remove('hidden');
+            adminPassword.focus();
+        });
+
+        cancelLogin.addEventListener('click', () => {
+            adminModal.classList.add('hidden');
+            adminPassword.value = '';
+        });
+
+        confirmLogin.addEventListener('click', () => {
+            if (adminPassword.value === '123') {
+                document.body.classList.add('is-admin');
+                adminModal.classList.add('hidden');
+                adminPassword.value = '';
+                showMessage('Editing Enabled! Click images to replace.');
+            } else {
+                showMessage('Incorrect password');
+                adminPassword.value = '';
+            }
+        });
+
+        // Handle Image Changes
+        document.getElementById('logoEditWrapper').addEventListener('click', () => {
+            if (document.body.classList.contains('is-admin')) logoInput.click();
+        });
+
+        document.getElementById('profileEditWrapper').addEventListener('click', () => {
+            if (document.body.classList.contains('is-admin')) profileInput.click();
+        });
+
+        logoInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    document.getElementById('businessLogo').src = event.target.result;
+                    showMessage('Logo updated locally');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        profileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    document.getElementById('profilePicture').src = event.target.result;
+                    showMessage('Profile updated locally');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
 
         document.getElementById('downloadButton').addEventListener('click', () => {
             const card = document.getElementById('id-card-content');
-            showMessage('Saving image...');
+            showMessage('Generating image...');
             html2canvas(card, {
                 scale: 3,
                 useCORS: true,
