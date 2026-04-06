@@ -121,7 +121,7 @@
         Action completed.
     </div>
 
-    <!-- Admin Button - Made highly visible -->
+    <!-- Admin Button -->
     <button id="adminLoginBtn" class="fixed bottom-6 right-6 z-50 w-12 h-12 bg-gray-900 text-gray-300 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95">
         <i data-lucide="settings" class="w-6 h-6"></i>
     </button>
@@ -152,12 +152,12 @@
                 <p id="contactTitle" class="text-sm font-medium text-gray-400 uppercase tracking-widest mt-2">Actress & Business Woman</p>
             </div>
 
-            <div class="space-y-3 mt-8">
-                <a href="tel:0962185060" class="contact-btn flex items-center justify-center p-3 bg-black text-[#FFFF00] font-bold rounded-xl">
-                    <i data-lucide="phone" class="w-5 h-5 mr-3"></i>
-                    Call: 0962185060
-                </a>
+            <!-- Phone Numbers Container -->
+            <div id="phoneListContainer" class="space-y-3 mt-8">
+                <!-- Phone buttons injected here -->
+            </div>
 
+            <div class="space-y-3 mt-3">
                 <a href="https://wa.me/251962185060" target="_blank" class="contact-btn flex items-center justify-center p-3 bg-black text-white font-bold rounded-xl border-green-500">
                     <i class="fa-brands fa-whatsapp text-xl mr-3 text-[#25D366]"></i>
                     WhatsApp Melat
@@ -217,17 +217,53 @@
     </div>
 
     <!-- Admin Modal -->
-    <div id="adminModal" class="fixed inset-0 bg-black/80 z-[100] hidden flex items-center justify-center p-4">
-        <div class="bg-gray-900 p-6 rounded-2xl border border-gray-800 w-full max-w-xs text-center shadow-2xl">
-            <div class="w-12 h-12 bg-[#FFFF00] rounded-full flex items-center justify-center mx-auto mb-4">
-                <i data-lucide="lock" class="text-black w-6 h-6"></i>
+    <div id="adminModal" class="fixed inset-0 bg-black/80 z-[100] hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-gray-900 p-6 rounded-2xl border border-gray-800 w-full max-w-sm text-center shadow-2xl my-8">
+            <div id="loginView">
+                <div class="w-12 h-12 bg-[#FFFF00] rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="lock" class="text-black w-6 h-6"></i>
+                </div>
+                <h2 class="text-[#FFFF00] text-xl font-bold mb-4">Admin Login</h2>
+                <input type="password" id="adminPassword" placeholder="Enter Password" class="w-full p-3 bg-black border border-gray-700 rounded-xl text-white mb-6 focus:border-[#FFFF00] outline-none transition-colors text-center tracking-widest">
+                <div class="flex gap-3">
+                    <button id="cancelLogin" class="flex-1 p-3 bg-gray-800 text-gray-400 font-bold rounded-xl hover:bg-gray-700">Cancel</button>
+                    <button id="confirmLogin" class="flex-1 p-3 bg-[#FFFF00] text-black font-bold rounded-xl hover:bg-yellow-400">Login</button>
+                </div>
             </div>
-            <h2 class="text-[#FFFF00] text-xl font-bold mb-4">Admin Login</h2>
-            <p class="text-gray-400 text-sm mb-6">Enter password to enable image editing</p>
-            <input type="password" id="adminPassword" placeholder="Enter Password" class="w-full p-3 bg-black border border-gray-700 rounded-xl text-white mb-6 focus:border-[#FFFF00] outline-none transition-colors text-center tracking-widest">
-            <div class="flex gap-3">
-                <button id="cancelLogin" class="flex-1 p-3 bg-gray-800 text-gray-400 font-bold rounded-xl hover:bg-gray-700 transition-colors">Cancel</button>
-                <button id="confirmLogin" class="flex-1 p-3 bg-[#FFFF00] text-black font-bold rounded-xl hover:bg-yellow-400 transition-colors shadow-lg shadow-yellow-900/20">Login</button>
+
+            <div id="dashboardView" class="hidden text-left">
+                <h2 class="text-[#FFFF00] text-xl font-bold mb-6 text-center border-b border-gray-800 pb-4">Admin Dashboard</h2>
+                
+                <!-- Image Management Section -->
+                <div class="mb-8 p-3 bg-black rounded-xl border border-gray-800">
+                    <label class="block text-gray-400 text-[10px] font-bold uppercase tracking-wider mb-3">Branding Images</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="document.getElementById('profileInput').click()" class="flex flex-col items-center justify-center p-3 bg-gray-900 border border-gray-700 rounded-xl hover:border-[#FFFF00] transition-colors group">
+                            <i data-lucide="user" class="w-5 h-5 mb-2 text-gray-500 group-hover:text-[#FFFF00]"></i>
+                            <span class="text-[10px] text-white font-bold">Profile Pic</span>
+                        </button>
+                        <button onclick="document.getElementById('logoInput').click()" class="flex flex-col items-center justify-center p-3 bg-gray-900 border border-gray-700 rounded-xl hover:border-[#FFFF00] transition-colors group">
+                            <i data-lucide="image" class="w-5 h-5 mb-2 text-gray-500 group-hover:text-[#FFFF00]"></i>
+                            <span class="text-[10px] text-white font-bold">Company Logo</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Phone Number Management -->
+                <div class="mb-6">
+                    <label class="block text-gray-400 text-[10px] font-bold uppercase tracking-wider mb-2">Phone Numbers</label>
+                    <div id="adminPhoneList" class="space-y-2 mb-4">
+                        <!-- Admin list of phones -->
+                    </div>
+                    <div class="flex gap-2">
+                        <input type="tel" id="newPhoneInput" placeholder="New Number" class="flex-1 p-2 bg-black border border-gray-700 rounded-lg text-white text-sm outline-none focus:border-[#FFFF00]">
+                        <button id="addPhoneBtn" class="bg-[#FFFF00] text-black p-2 px-4 rounded-lg font-bold text-sm">Add</button>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-gray-800">
+                    <button id="logoutBtn" class="w-full p-3 bg-gray-800 text-white font-bold rounded-xl hover:bg-red-900/40 transition-colors">Logout Dashboard</button>
+                </div>
             </div>
         </div>
     </div>
@@ -236,93 +272,140 @@
         lucide.createIcons();
         const messageBox = document.getElementById('messageBox');
         
+        // State Management
+        let phoneNumbers = JSON.parse(localStorage.getItem('melat_phones')) || ["0962185060"];
+
         function showMessage(text) {
             messageBox.textContent = text;
             messageBox.classList.remove('hidden');
             messageBox.classList.add('bg-gray-800', 'text-[#FFFF00]', 'border', 'border-[#FFFF00]', 'scale-100');
-            setTimeout(() => { 
-                messageBox.classList.add('hidden'); 
-            }, 3000);
+            setTimeout(() => { messageBox.classList.add('hidden'); }, 3000);
         }
+
+        function renderPhones() {
+            const container = document.getElementById('phoneListContainer');
+            container.innerHTML = phoneNumbers.map(phone => `
+                <a href="tel:${phone.replace(/\s/g, '')}" class="contact-btn flex items-center justify-center p-3 bg-black text-[#FFFF00] font-bold rounded-xl">
+                    <i data-lucide="phone" class="w-5 h-5 mr-3"></i>
+                    Call: ${phone}
+                </a>
+            `).join('');
+
+            const adminList = document.getElementById('adminPhoneList');
+            adminList.innerHTML = phoneNumbers.map((phone, index) => `
+                <div class="flex items-center justify-between bg-black p-2 px-3 rounded-lg border border-gray-800">
+                    <span class="text-white text-sm font-mono">${phone}</span>
+                    <button onclick="removePhone(${index})" class="text-red-500 hover:bg-red-500/10 p-1 rounded">
+                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            `).join('');
+
+            lucide.createIcons();
+            localStorage.setItem('melat_phones', JSON.stringify(phoneNumbers));
+        }
+
+        window.removePhone = (index) => {
+            if (phoneNumbers.length <= 1) {
+                showMessage("Must have at least one phone number");
+                return;
+            }
+            phoneNumbers.splice(index, 1);
+            renderPhones();
+        };
 
         // Admin Logic
         const adminLoginBtn = document.getElementById('adminLoginBtn');
         const adminModal = document.getElementById('adminModal');
+        const loginView = document.getElementById('loginView');
+        const dashboardView = document.getElementById('dashboardView');
         const adminPassword = document.getElementById('adminPassword');
-        const confirmLogin = document.getElementById('confirmLogin');
-        const cancelLogin = document.getElementById('cancelLogin');
-        const logoInput = document.getElementById('logoInput');
-        const profileInput = document.getElementById('profileInput');
-
+        
         adminLoginBtn.addEventListener('click', () => {
-            if (document.body.classList.contains('is-admin')) {
-                document.body.classList.remove('is-admin');
-                showMessage('Admin mode deactivated');
-                return;
-            }
             adminModal.classList.remove('hidden');
-            adminPassword.focus();
+            if (document.body.classList.contains('is-admin')) {
+                loginView.classList.add('hidden');
+                dashboardView.classList.remove('hidden');
+            } else {
+                loginView.classList.remove('hidden');
+                dashboardView.classList.add('hidden');
+                adminPassword.focus();
+            }
         });
 
-        cancelLogin.addEventListener('click', () => {
-            adminModal.classList.add('hidden');
-            adminPassword.value = '';
-        });
-
-        confirmLogin.addEventListener('click', () => {
+        document.getElementById('confirmLogin').addEventListener('click', () => {
             if (adminPassword.value === '123') {
                 document.body.classList.add('is-admin');
-                adminModal.classList.add('hidden');
+                loginView.classList.add('hidden');
+                dashboardView.classList.remove('hidden');
                 adminPassword.value = '';
-                showMessage('Editing Enabled! Click images to replace.');
+                showMessage('Dashboard Unlocked');
             } else {
                 showMessage('Incorrect password');
                 adminPassword.value = '';
             }
         });
 
-        // Handle Image Changes
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            document.body.classList.remove('is-admin');
+            adminModal.classList.add('hidden');
+            showMessage('Logged out');
+        });
+
+        document.getElementById('cancelLogin').addEventListener('click', () => {
+            adminModal.classList.add('hidden');
+        });
+
+        document.getElementById('addPhoneBtn').addEventListener('click', () => {
+            const input = document.getElementById('newPhoneInput');
+            const val = input.value.trim();
+            if (val) {
+                phoneNumbers.push(val);
+                input.value = '';
+                renderPhones();
+                showMessage('Phone number added');
+            }
+        });
+
+        // Image Direct Click Handlers
         document.getElementById('logoEditWrapper').addEventListener('click', () => {
-            if (document.body.classList.contains('is-admin')) logoInput.click();
+            if (document.body.classList.contains('is-admin')) document.getElementById('logoInput').click();
         });
 
         document.getElementById('profileEditWrapper').addEventListener('click', () => {
-            if (document.body.classList.contains('is-admin')) profileInput.click();
+            if (document.body.classList.contains('is-admin')) document.getElementById('profileInput').click();
         });
 
-        logoInput.addEventListener('change', (e) => {
+        // Unified Image Change Logic
+        document.getElementById('logoInput').addEventListener('change', (e) => {
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = (event) => {
-                    document.getElementById('businessLogo').src = event.target.result;
-                    showMessage('Logo updated locally');
+                reader.onload = (event) => { 
+                    document.getElementById('businessLogo').src = event.target.result; 
+                    showMessage('Logo updated'); 
                 };
                 reader.readAsDataURL(file);
             }
         });
 
-        profileInput.addEventListener('change', (e) => {
+        document.getElementById('profileInput').addEventListener('change', (e) => {
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = (event) => {
-                    document.getElementById('profilePicture').src = event.target.result;
-                    showMessage('Profile updated locally');
+                reader.onload = (event) => { 
+                    document.getElementById('profilePicture').src = event.target.result; 
+                    showMessage('Profile picture updated'); 
                 };
                 reader.readAsDataURL(file);
             }
         });
 
+        // Utility Buttons
         document.getElementById('downloadButton').addEventListener('click', () => {
             const card = document.getElementById('id-card-content');
             showMessage('Generating image...');
-            html2canvas(card, {
-                scale: 3,
-                useCORS: true,
-                backgroundColor: '#010203',
-                borderRadius: 24
-            }).then(canvas => {
+            html2canvas(card, { scale: 3, useCORS: true, backgroundColor: '#010203', borderRadius: 24 }).then(canvas => {
                 const link = document.createElement('a');
                 link.href = canvas.toDataURL('image/png');
                 link.download = 'Melat_Wolde_BusinessCard.png';
@@ -331,7 +414,7 @@
         });
 
         document.getElementById('vcfButton').addEventListener('click', () => {
-            let vcf = "BEGIN:VCARD\nVERSION:3.0\nFN:Melat Wolde\nORG:Melat's Gift Shop\nTITLE:Actress & Business Woman\nTEL:0962185060\nURL:https://t.me/Melatsgiftshop\nEND:VCARD";
+            let vcf = `BEGIN:VCARD\nVERSION:3.0\nFN:Melat Wolde\nORG:Melat's Gift Shop\nTITLE:Actress & Business Woman\n${phoneNumbers.map(p => `TEL:${p}`).join('\n')}\nURL:https://t.me/Melatsgiftshop\nEND:VCARD`;
             const blob = new Blob([vcf], { type: 'text/vcard' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
@@ -339,6 +422,8 @@
             link.click();
             showMessage('VCF Created!');
         });
+
+        renderPhones();
     </script>
 </body>
 </html>
