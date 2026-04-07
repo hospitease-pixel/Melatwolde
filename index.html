@@ -4,138 +4,153 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Melat Wolde | Melat's Gift Shop</title>
-    <meta property="og:title" content="Melat Wolde - Digital Business Card" />
-    <meta property="og:description" content="Digital Business Card for Melat Wolde, Actress and Business Woman at Melat's Gift Shop." />
-    <meta property="og:image" content="https://i.ibb.co/sGZVzgq/IMG-9715.jpg" />
+    <meta name="description" content="Digital Business Card for Melat Wolde, actress and business woman at Melat's Gift Shop.">
+    <meta name="theme-color" content="#010203">
+    <meta property="og:title" content="Melat Wolde - Digital Business Card">
+    <meta property="og:description" content="Digital Business Card for Melat Wolde, actress and business woman at Melat's Gift Shop.">
+    <meta property="og:image" content="https://i.ibb.co/sGZVzgq/IMG-9715.jpg">
+    <meta property="og:type" content="website">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
+        :root {
+            --card-bg: #010203;
+            --cover-bg: #0a0a0a;
+            --accent: #ffff00;
+            --name: #ffffff;
+            --org: #ffff00;
+            --title: #9ca3af;
+            --bio: #d1d5db;
+            --contact-btn-bg: #000000;
+            --contact-btn-text: #ffff00;
+            --util-btn-bg: #111827;
+            --util-btn-text: #f3f4f6;
+            --primary-btn-bg: #ffff00;
+            --primary-btn-text: #000000;
+        }
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #010203;
+            font-family: "Inter", sans-serif;
+            background:
+                radial-gradient(circle at top, rgba(255, 255, 0, 0.08), transparent 28%),
+                linear-gradient(180deg, #050607 0%, #010203 100%);
+            background-color: var(--card-bg);
+            color: #ffffff;
+            -webkit-tap-highlight-color: transparent;
         }
+        .hidden-view { display: none !important; }
+        .contact-btn, .util-btn, .primary-btn { transition: all 0.2s ease; }
         .contact-btn {
-            transition: all 0.2s;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
-            border: 1px solid #FFFF00;
+            background: var(--contact-btn-bg);
+            color: var(--contact-btn-text);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.28);
+            border: 1px solid var(--accent);
         }
-        .contact-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 15px rgba(255, 255, 0, 0.4);
-        }
+        .contact-btn:hover { transform: translateY(-1px); box-shadow: 0 0 18px rgba(255, 255, 0, 0.18); }
+        .primary-btn { background: var(--primary-btn-bg); color: var(--primary-btn-text); box-shadow: 0 12px 22px rgba(0, 0, 0, 0.28); }
+        .primary-btn:hover { transform: translateY(-1px); opacity: 0.94; }
+        .util-btn { background: var(--util-btn-bg); color: var(--util-btn-text); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .util-btn:hover { transform: translateY(-1px); border-color: var(--accent); }
         .wave-background {
-            background: linear-gradient(to bottom, #0a0a0a 0%, #010203 100%);
+            background: linear-gradient(to bottom, var(--cover-bg) 0%, var(--card-bg) 100%);
             position: relative;
             overflow: hidden;
             z-index: 1;
-            border-bottom: 4px solid #FFFF00;
+            border-bottom: 3px solid var(--accent);
         }
-        .graph-pattern-background {
-            background-color: #010203;
-        }
-        .strip-decoration {
-            position: absolute;
-            width: 450px;
-            height: 10px;
-            background-color: #1f2937;
-            transform: rotate(-45deg);
-            opacity: 0.5;
-        }
+        .graph-pattern-background { background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 50%), var(--card-bg); }
+        .strip-decoration { position: absolute; width: 450px; height: 10px; background-color: rgba(255,255,255,0.08); transform: rotate(-45deg); opacity: 0.5; }
         .strip-ur-1 { top: -100px; right: -150px; }
         .strip-ll-1 { bottom: -100px; left: -150px; }
-        .icon-facebook { background-color: #1877F2; color: white; }
-        .icon-youtube { background-color: #FF0000; color: white; }
-        .icon-tiktok { background-color: #000000; color: white; }
-        .icon-telegram { background-color: #0088cc; color: white; }
-        .icon-whatsapp { background-color: #25D366; color: white; }
-        .icon-instagram {
-            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #405ded 90%);
-            color: white;
-        }
-        @keyframes slow-pulse {
-            0% { transform: scale(1); opacity: 0.15; }
-            50% { transform: scale(1.1); opacity: 0.25; }
-            100% { transform: scale(1); opacity: 0.15; }
-        }
-        .animate-watermark {
-            animation: slow-pulse 8s ease-in-out infinite;
-        }
-        #businessLogo {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: block;
-            transform: scale(1.1);
-        }
-        .profile-container {
-            z-index: 20;
-            position: relative;
-        }
-        
-        /* Edit Mode Styles */
-        .admin-editable {
-            cursor: pointer;
-            position: relative;
-        }
+        .icon-facebook { background-color: #1877f2; color: #ffffff; }
+        .icon-youtube { background-color: #ff0000; color: #ffffff; }
+        .icon-tiktok { background-color: #000000; color: #ffffff; }
+        .icon-telegram { background-color: #0088cc; color: #ffffff; }
+        .icon-whatsapp { background-color: #25d366; color: #ffffff; }
+        .icon-link { background-color: #374151; color: #ffffff; }
+        .icon-instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #405ded 90%); color: #ffffff; }
+        .social-icon { width: 2.75rem; height: 2.75rem; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; transition: transform 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 10px 16px rgba(0,0,0,0.18); }
+        .social-icon:hover { transform: translateY(-1px) scale(1.04); box-shadow: 0 14px 22px rgba(0,0,0,0.24); }
+        @keyframes slow-pulse { 0% { transform: scale(1); opacity: 0.14; } 50% { transform: scale(1.08); opacity: 0.24; } 100% { transform: scale(1); opacity: 0.14; } }
+        .animate-watermark { animation: slow-pulse 8s ease-in-out infinite; }
+        #businessLogo { width: 100%; height: 100%; object-fit: contain; display: block; transform: scale(1.08); }
+        .profile-container { z-index: 20; position: relative; }
+        .admin-editable { cursor: pointer; position: relative; }
         .admin-editable::after {
-            content: 'Click to Change';
+            content: "Click to Change";
             position: absolute;
             inset: 0;
-            background: rgba(0,0,0,0.7);
-            color: #FFFF00;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--accent);
             display: none;
             align-items: center;
             justify-content: center;
             font-size: 12px;
-            font-weight: bold;
+            font-weight: 700;
             border-radius: inherit;
-            border: 2px dashed #FFFF00;
+            border: 2px dashed var(--accent);
         }
-        body.is-admin .admin-editable:hover::after {
-            display: flex;
+        body.is-admin .admin-editable:hover::after { display: flex; }
+        #adminLoginBtn { box-shadow: 0 0 10px rgba(255,255,0,0.25); border: 1px solid #333333; }
+        #adminLoginBtn:hover { box-shadow: 0 0 20px rgba(255,255,0,0.5); background-color: #222222; }
+        body.is-admin #adminLoginBtn { color: var(--accent); border-color: var(--accent); }
+        #messageBox, #syncStatus { backdrop-filter: blur(12px); }
+        #syncStatus {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            padding: 0.45rem 0.85rem;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            z-index: 60;
+            border: 1px solid #374151;
+            background: rgba(17, 24, 39, 0.9);
+            color: #d1d5db;
         }
-        
-        /* High Visibility Admin Button */
-        #adminLoginBtn {
-            box-shadow: 0 0 10px rgba(255, 255, 0, 0.3);
-            border: 1px solid #333;
+        .status-online { border-color: rgba(255,255,0,0.8) !important; color: #ffffb5 !important; }
+        .status-offline { border-color: #4b5563 !important; color: #d1d5db !important; }
+        .dashboard-card { background: rgba(3, 7, 18, 0.95); border: 1px solid rgba(255,255,255,0.08); border-radius: 1.25rem; }
+        .dashboard-input, .dashboard-textarea, .dashboard-select {
+            width: 100%;
+            padding: 0.75rem 0.9rem;
+            border-radius: 0.9rem;
+            border: 1px solid #374151;
+            background: #020617;
+            color: #ffffff;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
-        #adminLoginBtn:hover {
-            box-shadow: 0 0 20px rgba(255, 255, 0, 0.6);
-            background-color: #222;
-        }
-        body.is-admin #adminLoginBtn {
-            color: #FFFF00;
-            border-color: #FFFF00;
-        }
+        .dashboard-input:focus, .dashboard-textarea:focus, .dashboard-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(255,255,0,0.12); }
+        .dashboard-label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9ca3af; margin-bottom: 0.45rem; }
+        .dashboard-chip { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.55rem 0.85rem; border-radius: 999px; font-size: 0.78rem; font-weight: 700; border: 1px solid rgba(255,255,255,0.1); }
     </style>
 </head>
 <body class="min-h-screen p-4 py-8">
-    <!-- Hidden Inputs for Image Upload -->
     <input type="file" id="logoInput" accept="image/*" class="hidden">
     <input type="file" id="profileInput" accept="image/*" class="hidden">
+    <input type="file" id="portfolioInput" accept="image/*" class="hidden">
 
-    <div id="messageBox" class="fixed top-4 left-1/2 -translate-x-1/2 p-3 rounded-lg text-sm text-center hidden z-50 transition-all duration-300 shadow-xl">
-        Action completed.
-    </div>
+    <div id="messageBox" class="fixed top-4 left-1/2 z-50 hidden -translate-x-1/2 rounded-xl border px-4 py-3 text-sm font-semibold shadow-2xl"></div>
+    <div id="syncStatus" class="status-offline">SYNC: INITIALIZING</div>
 
-    <!-- Admin Button -->
-    <button id="adminLoginBtn" class="fixed bottom-6 right-6 z-50 w-12 h-12 bg-gray-900 text-gray-300 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95">
-        <i data-lucide="settings" class="w-6 h-6"></i>
+    <button id="adminLoginBtn" class="fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-gray-900 text-gray-300 transition-all duration-300 hover:scale-110 active:scale-95">
+        <i data-lucide="settings" class="h-6 w-6"></i>
     </button>
 
-    <div id="id-card-content" class="graph-pattern-background max-w-sm w-full mx-auto p-4 md:p-6 rounded-3xl border border-gray-800 shadow-[0_20px_50px_rgba(0,0,0,0.8)] relative overflow-hidden">
-        <div class="wave-background absolute top-0 left-0 right-0 h-80 -mt-1 -mx-1 rounded-t-[1.5rem] flex justify-center items-center">
-            <div class="p-2 flex justify-center items-center z-10 w-full h-full admin-editable" id="logoEditWrapper">
-                <img id="businessLogo" src="https://i.ibb.co/4R5wZ5yh/and-many-more.png" alt="And Many More Logo" onerror="this.onerror=null; this.src='https://placehold.co/400x400/010203/FFFF00?text=LOGO';">
+    <div id="id-card-content" class="graph-pattern-background relative mx-auto w-full max-w-sm overflow-hidden rounded-3xl border border-gray-800 p-4 shadow-[0_20px_50px_rgba(0,0,0,0.8)] md:p-6">
+        <div class="wave-background absolute left-0 right-0 top-0 -mx-1 -mt-1 flex h-80 items-center justify-center rounded-t-[1.5rem]">
+            <div class="admin-editable z-10 flex h-full w-full items-center justify-center p-2" id="logoEditWrapper">
+                <img id="businessLogo" src="https://i.ibb.co/4R5wZ5yh/and-many-more.png" alt="Melat's Gift Shop Logo" onerror="this.onerror=null; this.src='https://placehold.co/400x400/010203/FFFF00?text=LOGO';">
             </div>
         </div>
 
-        <div class="absolute inset-0 z-0 pointer-events-none flex justify-center items-center">
-            <div class="absolute animate-watermark w-full h-full flex justify-center items-center opacity-20">
-                <img src="https://i.ibb.co/fVbzK5c9/5897882944259427510.png" alt="Watermark" class="w-4/5 h-4/5 object-contain">
+        <div class="pointer-events-none absolute inset-0 z-0 flex items-center justify-center">
+            <div class="animate-watermark absolute flex h-full w-full items-center justify-center opacity-20">
+                <img src="https://i.ibb.co/fVbzK5c9/5897882944259427510.png" alt="Watermark" class="h-4/5 w-4/5 object-contain">
             </div>
         </div>
 
@@ -143,287 +158,1124 @@
         <div class="strip-decoration strip-ll-1"></div>
 
         <div class="relative z-10">
-            <div class="text-center mb-6 pt-64">
-                <div class="relative w-40 h-40 mx-auto rounded-full border-4 border-gray-900 shadow-2xl overflow-hidden profile-container admin-editable" id="profileEditWrapper">
-                    <img id="profilePicture" src="https://i.ibb.co/sGZVzgq/IMG-9715.jpg" alt="Melat Wolde" class="w-full h-full rounded-full object-cover">
+            <div class="pt-64 text-center">
+                <div class="profile-container admin-editable relative mx-auto h-40 w-40 overflow-hidden rounded-full border-4 border-gray-900 shadow-2xl" id="profileEditWrapper">
+                    <img id="profilePicture" src="https://i.ibb.co/sGZVzgq/IMG-9715.jpg" alt="Melat Wolde" class="h-full w-full rounded-full object-cover">
                 </div>
-                <h1 id="contactName" class="text-2xl font-extrabold text-white mt-4">Melat Wolde</h1>
-                <p id="contactOrg" class="text-xl font-semibold text-[#FFFF00] mt-1">Melat's Gift Shop</p>
-                <p id="contactTitle" class="text-sm font-medium text-gray-400 uppercase tracking-widest mt-2">Actress & Business Woman</p>
+                <h1 id="contactName" class="mt-4 text-2xl font-extrabold text-white">Melat Wolde</h1>
+                <p id="contactOrg" class="mt-1 text-xl font-semibold text-[#FFFF00]">Melat's Gift Shop</p>
+                <p id="contactTitle" class="mt-2 text-sm font-medium uppercase tracking-widest text-gray-400">Actress &amp; Business Woman</p>
+                <p id="contactBio" class="mx-auto mt-3 max-w-xs text-sm leading-6 text-gray-300"></p>
             </div>
 
-            <!-- Phone Numbers Container -->
-            <div id="phoneListContainer" class="space-y-3 mt-8">
-                <!-- Phone buttons injected here -->
-            </div>
-
-            <div class="space-y-3 mt-3">
-                <a href="https://wa.me/251962185060" target="_blank" class="contact-btn flex items-center justify-center p-3 bg-black text-white font-bold rounded-xl border-green-500">
-                    <i class="fa-brands fa-whatsapp text-xl mr-3 text-[#25D366]"></i>
-                    WhatsApp Melat
+            <div id="quickActionRow" class="mt-6 space-y-3">
+                <a id="whatsappBtn" href="#" target="_blank" rel="noopener noreferrer" class="contact-btn flex items-center justify-center rounded-xl px-4 py-3 text-sm font-bold">
+                    <i class="fa-brands fa-whatsapp mr-3 text-lg text-[#25D366]"></i>
+                    <span id="whatsappBtnLabel">WhatsApp Melat</span>
                 </a>
-
-                <a href="sms:0962185060" class="contact-btn flex items-center justify-center p-3 bg-black text-white font-bold rounded-xl border-gray-700">
-                    <i data-lucide="message-square" class="w-5 h-5 mr-3"></i>
-                    Send SMS
+                <a id="smsBtn" href="#" class="contact-btn flex items-center justify-center rounded-xl px-4 py-3 text-sm font-bold">
+                    <i data-lucide="message-square" class="mr-3 h-5 w-5"></i>
+                    <span id="smsBtnLabel">Send SMS</span>
                 </a>
             </div>
 
-            <div class="mt-8 border-t border-gray-800 pt-6">
-                <!-- Shop Links -->
-                <div class="text-center mb-3 text-[10px] font-bold text-gray-500 tracking-widest uppercase">Melat's Gift Shop</div>
-                <div class="flex flex-wrap justify-center gap-4 mb-6">
-                    <a href="https://www.instagram.com/melatsgiftshop?igsh=azlxbjgxdWh1YWJy&utm_source=qr" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full transition-transform hover:scale-110 icon-instagram">
-                        <i class="fa-brands fa-instagram"></i>
-                    </a>
-                    <a href="https://t.me/Melatsgiftshop" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full transition-transform hover:scale-110 icon-telegram">
-                        <i class="fa-brands fa-telegram"></i>
-                    </a>
-                    <a href="https://www.tiktok.com/@melatsgiftshop?_r=1" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full transition-transform hover:scale-110 icon-tiktok">
-                        <i class="fa-brands fa-tiktok"></i>
-                    </a>
-                </div>
+            <div id="phoneListContainer" class="mt-6 space-y-3"></div>
+            <div id="emailListContainer" class="mt-3 space-y-3"></div>
 
-                <!-- Personal Links -->
-                <div class="text-center mb-3 text-[10px] font-bold text-gray-500 tracking-widest uppercase border-t border-gray-900 pt-4">Personal Accounts</div>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <a href="https://www.instagram.com/melat__wolde?igsh=NGhxZGRzY2JnNG9r" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full transition-transform hover:scale-110 icon-instagram">
-                        <i class="fa-brands fa-instagram"></i>
-                    </a>
-                    <a href="https://www.tiktok.com/@melat_wolde?_r=1&_t=ZM-91uMPOc6Ktc" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full transition-transform hover:scale-110 icon-tiktok">
-                        <i class="fa-brands fa-tiktok"></i>
-                    </a>
-                    <a href="https://www.youtube.com/@melatwolde_7407" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full transition-transform hover:scale-110 icon-youtube">
-                        <i class="fa-brands fa-youtube"></i>
-                    </a>
-                    <a href="https://www.facebook.com/melat.wolde.149486" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full transition-transform hover:scale-110 icon-facebook">
-                        <i class="fa-brands fa-facebook-f"></i>
-                    </a>
-                </div>
+            <div id="mainBtnRow" class="mt-6 grid grid-cols-1 gap-2 sm:grid-cols-3">
+                <a href="#" target="_blank" id="btnWebsite" class="util-btn flex items-center justify-center rounded-xl px-4 py-3 text-sm font-bold">
+                    <i data-lucide="globe" class="mr-2 h-4 w-4"></i>
+                    Website
+                </a>
+                <button id="btnPortfolio" type="button" class="util-btn flex items-center justify-center rounded-xl px-4 py-3 text-sm font-bold">
+                    <i data-lucide="folder" class="mr-2 h-4 w-4"></i>
+                    Portfolio
+                </button>
+                <a href="#" target="_blank" id="btnLocation" class="util-btn flex items-center justify-center rounded-xl px-4 py-3 text-sm font-bold">
+                    <i data-lucide="map-pin" class="mr-2 h-4 w-4"></i>
+                    Location
+                </a>
             </div>
 
-            <div class="mt-10 space-y-3">
-                <button id="downloadButton" class="w-full flex items-center justify-center p-3 bg-[#FFFF00] text-black font-black rounded-xl shadow-lg hover:opacity-90 transition-opacity">
-                    <i data-lucide="download" class="w-5 h-5 mr-2"></i>
-                    SAVE CARD AS IMAGE
+            <div id="socialBlock" class="mt-6 border-t border-b border-gray-800 pt-4 pb-4">
+                <section id="shopSocialSection" class="hidden-view">
+                    <div id="shopSectionLabel" class="mb-3 text-center text-[10px] font-bold uppercase tracking-[0.22em] text-gray-500">Melat's Gift Shop</div>
+                    <div id="shopSocialContainer" class="flex flex-wrap justify-center gap-3"></div>
+                </section>
+
+                <section id="personalSocialSection" class="hidden-view">
+                    <div id="personalSectionLabel" class="mb-3 mt-4 text-center text-[10px] font-bold uppercase tracking-[0.22em] text-gray-500">Personal Accounts</div>
+                    <div id="personalSocialContainer" class="flex flex-wrap justify-center gap-3"></div>
+                </section>
+
+                <div id="customLinksContainer" class="mt-4 flex flex-wrap justify-center gap-2"></div>
+            </div>
+
+            <div class="mt-6 space-y-3">
+                <button id="downloadButton" class="primary-btn flex w-full items-center justify-center rounded-xl px-4 py-3 text-sm font-black">
+                    <i data-lucide="download" class="mr-2 h-5 w-5"></i>
+                    Save Card As Image
                 </button>
 
-                <button id="vcfButton" class="w-full flex items-center justify-center p-3 bg-transparent text-gray-300 font-bold rounded-xl border border-gray-700 hover:bg-gray-900 transition-colors">
-                    <i data-lucide="user-plus" class="w-5 h-5 mr-2"></i>
-                    ADD TO CONTACTS
+                <button id="vcfButton" class="util-btn flex w-full items-center justify-center rounded-xl px-4 py-3 text-sm font-bold">
+                    <i data-lucide="user-plus" class="mr-2 h-5 w-5"></i>
+                    Add To Contacts
+                </button>
+
+                <button id="qrOpenBtn" class="util-btn flex w-full items-center justify-center rounded-xl px-4 py-3 text-sm font-bold">
+                    <i data-lucide="qr-code" class="mr-2 h-5 w-5"></i>
+                    View QR Code
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Admin Modal -->
-    <div id="adminModal" class="fixed inset-0 bg-black/80 z-[100] hidden flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-gray-900 p-6 rounded-2xl border border-gray-800 w-full max-w-sm text-center shadow-2xl my-8">
-            <div id="loginView">
-                <div class="w-12 h-12 bg-[#FFFF00] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i data-lucide="lock" class="text-black w-6 h-6"></i>
+    <div id="portfolioModal" class="hidden-view fixed inset-0 z-[90] flex items-center justify-center bg-black/80 p-4">
+        <div class="absolute inset-0" data-close-portfolio="true"></div>
+        <div class="relative z-10 w-full max-w-lg rounded-3xl border border-gray-800 bg-gray-950 p-6 shadow-2xl">
+            <button id="portfolioCloseBtn" class="absolute right-4 top-4 text-gray-400 transition-colors hover:text-white">
+                <i data-lucide="x" class="h-5 w-5"></i>
+            </button>
+            <h3 class="mb-4 text-center text-lg font-bold text-[#FFFF00]">Portfolio Preview</h3>
+            <img id="portfolioImageView" src="" alt="Portfolio" class="max-h-[70vh] w-full rounded-2xl border border-gray-800 bg-black object-contain">
+        </div>
+    </div>
+
+    <div id="qrModal" class="hidden-view fixed inset-0 z-[95] flex items-center justify-center bg-black/80 p-4">
+        <div class="absolute inset-0" data-close-qr="true"></div>
+        <div class="relative z-10 w-full max-w-sm rounded-3xl border border-gray-800 bg-gray-950 p-6 text-center shadow-2xl">
+            <button id="qrCloseBtn" class="absolute right-4 top-4 text-gray-400 transition-colors hover:text-white">
+                <i data-lucide="x" class="h-5 w-5"></i>
+            </button>
+            <h3 class="mb-3 text-lg font-bold text-[#FFFF00]">Scan Melat's Card</h3>
+            <p class="mb-4 text-sm text-gray-400">Open the profile instantly by scanning this QR code.</p>
+            <div id="qrCodeTarget" class="mx-auto flex min-h-[220px] items-center justify-center rounded-2xl border border-gray-800 bg-white p-4"></div>
+        </div>
+    </div>
+
+    <div id="adminModal" class="hidden-view fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4">
+        <div class="absolute inset-0" id="adminBackdrop"></div>
+        <div id="adminShell" class="relative z-10 w-full max-w-5xl overflow-hidden rounded-[28px] border border-gray-800 bg-gray-950 shadow-2xl">
+            <div id="loginView" class="mx-auto max-w-md p-8">
+                <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-[#FFFF00] text-black">
+                    <i data-lucide="lock" class="h-7 w-7"></i>
                 </div>
-                <h2 class="text-[#FFFF00] text-xl font-bold mb-4">Admin Login</h2>
-                <input type="password" id="adminPassword" placeholder="Enter Password" class="w-full p-3 bg-black border border-gray-700 rounded-xl text-white mb-6 focus:border-[#FFFF00] outline-none transition-colors text-center tracking-widest">
-                <div class="flex gap-3">
-                    <button id="cancelLogin" class="flex-1 p-3 bg-gray-800 text-gray-400 font-bold rounded-xl hover:bg-gray-700">Cancel</button>
-                    <button id="confirmLogin" class="flex-1 p-3 bg-[#FFFF00] text-black font-bold rounded-xl hover:bg-yellow-400">Login</button>
+                <h2 class="text-2xl font-bold text-[#FFFF00]">Admin Login</h2>
+                <p class="mt-3 text-sm leading-6 text-gray-400">Enter the admin password to unlock the full Melat Wolde dashboard and edit every card detail.</p>
+                <input type="password" id="adminPassword" placeholder="Enter Password" class="dashboard-input mt-6 text-center tracking-[0.3em]">
+                <div class="mt-6 flex gap-3">
+                    <button id="cancelLogin" class="flex-1 rounded-xl border border-gray-800 bg-gray-900 px-4 py-3 font-bold text-gray-300 transition-colors hover:bg-gray-800">Cancel</button>
+                    <button id="confirmLogin" class="flex-1 rounded-xl bg-[#FFFF00] px-4 py-3 font-bold text-black transition-colors hover:bg-yellow-300">Login</button>
                 </div>
             </div>
 
-            <div id="dashboardView" class="hidden text-left">
-                <h2 class="text-[#FFFF00] text-xl font-bold mb-6 text-center border-b border-gray-800 pb-4">Admin Dashboard</h2>
-                
-                <!-- Image Management Section -->
-                <div class="mb-8 p-3 bg-black rounded-xl border border-gray-800">
-                    <label class="block text-gray-400 text-[10px] font-bold uppercase tracking-wider mb-3">Branding Images</label>
-                    <div class="grid grid-cols-2 gap-3">
-                        <button onclick="document.getElementById('profileInput').click()" class="flex flex-col items-center justify-center p-3 bg-gray-900 border border-gray-700 rounded-xl hover:border-[#FFFF00] transition-colors group">
-                            <i data-lucide="user" class="w-5 h-5 mb-2 text-gray-500 group-hover:text-[#FFFF00]"></i>
-                            <span class="text-[10px] text-white font-bold">Profile Pic</span>
-                        </button>
-                        <button onclick="document.getElementById('logoInput').click()" class="flex flex-col items-center justify-center p-3 bg-gray-900 border border-gray-700 rounded-xl hover:border-[#FFFF00] transition-colors group">
-                            <i data-lucide="image" class="w-5 h-5 mb-2 text-gray-500 group-hover:text-[#FFFF00]"></i>
-                            <span class="text-[10px] text-white font-bold">Company Logo</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Phone Number Management -->
-                <div class="mb-6">
-                    <label class="block text-gray-400 text-[10px] font-bold uppercase tracking-wider mb-2">Phone Numbers</label>
-                    <div id="adminPhoneList" class="space-y-2 mb-4">
-                        <!-- Admin list of phones -->
+            <div id="dashboardView" class="hidden-view max-h-[90vh] overflow-y-auto p-6 md:p-8">
+                <div class="mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-gray-800 pb-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-[#FFFF00]">Melat Wolde Dashboard</h2>
+                        <p class="mt-2 text-sm text-gray-400">Edit the profile, contacts, socials, card colors, QR target, portfolio, and admin password.</p>
                     </div>
                     <div class="flex gap-2">
-                        <input type="tel" id="newPhoneInput" placeholder="New Number" class="flex-1 p-2 bg-black border border-gray-700 rounded-lg text-white text-sm outline-none focus:border-[#FFFF00]">
-                        <button id="addPhoneBtn" class="bg-[#FFFF00] text-black p-2 px-4 rounded-lg font-bold text-sm">Add</button>
+                        <button id="closeDashboardBtn" class="rounded-xl border border-gray-800 bg-gray-900 px-4 py-2 font-bold text-gray-300 transition-colors hover:bg-gray-800">Close</button>
+                        <button id="logoutBtn" class="rounded-xl border border-red-900/60 bg-red-950/40 px-4 py-2 font-bold text-red-200 transition-colors hover:bg-red-900/50">Logout</button>
                     </div>
                 </div>
 
-                <div class="pt-4 border-t border-gray-800">
-                    <button id="logoutBtn" class="w-full p-3 bg-gray-800 text-white font-bold rounded-xl hover:bg-red-900/40 transition-colors">Logout Dashboard</button>
+                <div class="grid grid-cols-1 gap-6 xl:grid-cols-[1.15fr_0.85fr]">
+                    <div class="space-y-6">
+                        <section class="dashboard-card p-5">
+                            <div class="mb-4 flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-bold text-white">Profile Information</h3>
+                                    <p class="mt-1 text-sm text-gray-400">Main details shown on the card.</p>
+                                </div>
+                                <span class="dashboard-chip bg-[#FFFF00]/10 text-[#FFFF99]">Core Info</span>
+                            </div>
+
+                            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                                <div>
+                                    <label class="dashboard-label" for="editName">Name</label>
+                                    <input id="editName" type="text" class="dashboard-input">
+                                </div>
+                                <div>
+                                    <label class="dashboard-label" for="editOrg">Organization</label>
+                                    <input id="editOrg" type="text" class="dashboard-input">
+                                </div>
+                                <div>
+                                    <label class="dashboard-label" for="editTitle">Title</label>
+                                    <input id="editTitle" type="text" class="dashboard-input">
+                                </div>
+                                <div>
+                                    <label class="dashboard-label" for="editWebsite">Website</label>
+                                    <input id="editWebsite" type="url" class="dashboard-input" placeholder="https://">
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <label class="dashboard-label" for="editBio">Bio</label>
+                                <textarea id="editBio" class="dashboard-textarea h-24" placeholder="Short intro"></textarea>
+                            </div>
+
+                            <div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+                                <div>
+                                    <label class="dashboard-label" for="editLocation">Location URL</label>
+                                    <input id="editLocation" type="url" class="dashboard-input" placeholder="https://maps.app.goo.gl/...">
+                                </div>
+                                <div>
+                                    <div class="flex items-center justify-between gap-3">
+                                        <label class="dashboard-label mb-0" for="editQrLink">QR Code Link</label>
+                                        <button id="clearQrLinkBtn" type="button" class="text-[11px] font-bold uppercase tracking-[0.18em] text-[#FFFF00]">Clear</button>
+                                    </div>
+                                    <input id="editQrLink" type="url" class="dashboard-input mt-2" placeholder="Leave empty to use website/current page">
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="dashboard-card p-5">
+                            <div class="mb-4 flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-bold text-white">Branding Images</h3>
+                                    <p class="mt-1 text-sm text-gray-400">Upload or replace the profile photo, company logo, and portfolio image.</p>
+                                </div>
+                                <span class="dashboard-chip bg-[#FFFF00]/10 text-[#FFFF99]">Images</span>
+                            </div>
+
+                            <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+                                <div class="rounded-2xl border border-gray-800 bg-black p-4">
+                                    <label class="dashboard-label">Profile Picture</label>
+                                    <img id="editProfilePreview" src="" alt="Profile preview" class="mx-auto h-28 w-28 rounded-full border border-gray-800 bg-gray-900 object-cover">
+                                    <button type="button" id="pickProfileImageBtn" class="mt-4 w-full rounded-xl border border-gray-800 bg-gray-900 px-4 py-3 text-sm font-bold text-white transition-colors hover:border-[#FFFF00]">Choose Profile Image</button>
+                                </div>
+                                <div class="rounded-2xl border border-gray-800 bg-black p-4">
+                                    <label class="dashboard-label">Company Logo</label>
+                                    <div class="flex h-28 items-center justify-center rounded-2xl border border-gray-800 bg-gray-900 p-3">
+                                        <img id="editLogoPreview" src="" alt="Logo preview" class="h-full w-full object-contain">
+                                    </div>
+                                    <button type="button" id="pickLogoImageBtn" class="mt-4 w-full rounded-xl border border-gray-800 bg-gray-900 px-4 py-3 text-sm font-bold text-white transition-colors hover:border-[#FFFF00]">Choose Logo Image</button>
+                                </div>
+                                <div class="rounded-2xl border border-gray-800 bg-black p-4">
+                                    <label class="dashboard-label">Portfolio Image</label>
+                                    <div class="flex h-28 items-center justify-center rounded-2xl border border-gray-800 bg-gray-900 p-3">
+                                        <img id="editPortfolioPreview" src="" alt="Portfolio preview" class="h-full w-full object-contain">
+                                    </div>
+                                    <div class="mt-4 flex gap-2">
+                                        <button type="button" id="pickPortfolioBtn" class="flex-1 rounded-xl border border-gray-800 bg-gray-900 px-4 py-3 text-sm font-bold text-white transition-colors hover:border-[#FFFF00]">Choose</button>
+                                        <button type="button" id="clearPortfolioBtn" class="rounded-xl border border-red-900/70 bg-red-950/40 px-4 py-3 text-sm font-bold text-red-200 transition-colors hover:bg-red-900/50">Clear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="dashboard-card p-5">
+                            <div class="mb-4 flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-bold text-white">Contacts</h3>
+                                    <p class="mt-1 text-sm text-gray-400">Manage multiple phone numbers and email addresses.</p>
+                                </div>
+                                <span class="dashboard-chip bg-[#FFFF00]/10 text-[#FFFF99]">Contact</span>
+                            </div>
+
+                            <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                                <div>
+                                    <div class="mb-3 flex items-center justify-between">
+                                        <label class="dashboard-label mb-0">Phone Numbers</label>
+                                        <button id="addPhoneBtn" type="button" class="text-sm font-bold text-[#FFFF00]">+ Add Phone</button>
+                                    </div>
+                                    <div id="adminPhoneList" class="space-y-3"></div>
+                                </div>
+                                <div>
+                                    <div class="mb-3 flex items-center justify-between">
+                                        <label class="dashboard-label mb-0">Email Addresses</label>
+                                        <button id="addEmailBtn" type="button" class="text-sm font-bold text-[#FFFF00]">+ Add Email</button>
+                                    </div>
+                                    <div id="adminEmailList" class="space-y-3"></div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="space-y-6">
+                        <section class="dashboard-card p-5">
+                            <div class="mb-4 flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-bold text-white">Social Links</h3>
+                                    <p class="mt-1 text-sm text-gray-400">Add socials for the shop or personal accounts.</p>
+                                </div>
+                                <button id="addSocialBtn" type="button" class="text-sm font-bold text-[#FFFF00]">+ Add Social</button>
+                            </div>
+                            <div id="editSocialsList" class="space-y-3"></div>
+                        </section>
+
+                        <section class="dashboard-card p-5">
+                            <div class="mb-4 flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-bold text-white">Custom Links</h3>
+                                    <p class="mt-1 text-sm text-gray-400">Use these for shop pages, catalogs, or extra calls to action.</p>
+                                </div>
+                                <button id="addCustomLinkBtn" type="button" class="text-sm font-bold text-[#FFFF00]">+ Add Link</button>
+                            </div>
+                            <div id="editCustomLinksList" class="space-y-3"></div>
+                        </section>
+
+                        <section class="dashboard-card p-5">
+                            <div class="mb-4 flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-bold text-white">Design Customization</h3>
+                                    <p class="mt-1 text-sm text-gray-400">Update the black-and-gold theme colors across the card.</p>
+                                </div>
+                                <span class="dashboard-chip bg-[#FFFF00]/10 text-[#FFFF99]">Colors</span>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div><label class="dashboard-label" for="colorCardBg">Card Background</label><input id="colorCardBg" type="color" class="h-12 w-full rounded-xl border border-gray-800 bg-black p-1"></div>
+                                <div><label class="dashboard-label" for="colorCoverBg">Cover Area</label><input id="colorCoverBg" type="color" class="h-12 w-full rounded-xl border border-gray-800 bg-black p-1"></div>
+                                <div><label class="dashboard-label" for="colorAccent">Accent / Border</label><input id="colorAccent" type="color" class="h-12 w-full rounded-xl border border-gray-800 bg-black p-1"></div>
+                                <div><label class="dashboard-label" for="colorName">Name</label><input id="colorName" type="color" class="h-12 w-full rounded-xl border border-gray-800 bg-black p-1"></div>
+                                <div><label class="dashboard-label" for="colorOrg">Organization</label><input id="colorOrg" type="color" class="h-12 w-full rounded-xl border border-gray-800 bg-black p-1"></div>
+                                <div><label class="dashboard-label" for="colorTitle">Title</label><input id="colorTitle" type="color" class="h-12 w-full rounded-xl border border-gray-800 bg-black p-1"></div>
+                                <div><label class="dashboard-label" for="colorBio">Bio</label><input id="colorBio" type="color" class="h-12 w-full rounded-xl border border-gray-800 bg-black p-1"></div>
+                                <div><label class="dashboard-label" for="colorContactBtnBg">Contact Btn Bg</label><input id="colorContactBtnBg" type="color" class="h-12 w-full rounded-xl border border-gray-800 bg-black p-1"></div>
+                                <div><label class="dashboard-label" for="colorContactBtnText">Contact Btn Text</label><input id="colorContactBtnText" type="color" class="h-12 w-full rounded-xl border border-gray-800 bg-black p-1"></div>
+                                <div><label class="dashboard-label" for="colorUtilBtnBg">Util Btn Bg</label><input id="colorUtilBtnBg" type="color" class="h-12 w-full rounded-xl border border-gray-800 bg-black p-1"></div>
+                                <div><label class="dashboard-label" for="colorUtilBtnText">Util Btn Text</label><input id="colorUtilBtnText" type="color" class="h-12 w-full rounded-xl border border-gray-800 bg-black p-1"></div>
+                                <div><label class="dashboard-label" for="colorPrimaryBtnBg">Primary Btn Bg</label><input id="colorPrimaryBtnBg" type="color" class="h-12 w-full rounded-xl border border-gray-800 bg-black p-1"></div>
+                                <div><label class="dashboard-label" for="colorPrimaryBtnText">Primary Btn Text</label><input id="colorPrimaryBtnText" type="color" class="h-12 w-full rounded-xl border border-gray-800 bg-black p-1"></div>
+                            </div>
+                        </section>
+
+                        <section class="dashboard-card p-5">
+                            <div class="mb-4 flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-bold text-white">Admin Security</h3>
+                                    <p class="mt-1 text-sm text-gray-400">Change the admin password used to unlock this dashboard.</p>
+                                </div>
+                                <span class="dashboard-chip bg-[#FFFF00]/10 text-[#FFFF99]">Security</span>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div><label class="dashboard-label" for="editAdminPassword">Admin Password</label><input id="editAdminPassword" type="password" class="dashboard-input"></div>
+                                <div><label class="dashboard-label" for="editAdminPasswordConfirm">Confirm Password</label><input id="editAdminPasswordConfirm" type="password" class="dashboard-input"></div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex flex-col gap-3 border-t border-gray-800 pt-6 sm:flex-row">
+                    <button id="saveEdit" class="flex-1 rounded-xl bg-[#FFFF00] px-5 py-3 font-bold text-black transition-colors hover:bg-yellow-300">Save All Changes</button>
+                    <button id="resetProfileBtn" class="rounded-xl border border-red-900/70 bg-red-950/40 px-5 py-3 font-bold text-red-200 transition-colors hover:bg-red-900/50">Reset All To Default</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        lucide.createIcons();
-        const messageBox = document.getElementById('messageBox');
-        
-        // State Management
-        let phoneNumbers = JSON.parse(localStorage.getItem('melat_phones')) || ["0962185060"];
+        const STORAGE_KEY = "melat_wolde_profile_v2";
+        const SESSION_KEY = "melat_wolde_admin_session";
+        const firebaseConfig = {
+            apiKey: "AIzaSyAXWv2I0vDHwmhQVSe9ummW4NFkbPSgWvM",
+            authDomain: "lomi-smart-card.firebaseapp.com",
+            databaseURL: "https://lomi-smart-card-default-rtdb.firebaseio.com",
+            projectId: "lomi-smart-card",
+            storageBucket: "lomi-smart-card.firebasestorage.app",
+            messagingSenderId: "289807012389",
+            appId: "1:289807012389:web:095afbaf0be1d0390f65cc",
+            measurementId: "G-YY97G59MNF"
+        };
+        const appId = typeof __app_id !== "undefined" ? __app_id : "melat-wolde-card-v1";
+        const PLATFORMS = {
+            instagram: { label: "Instagram", icon: "fa-brands fa-instagram", theme: "icon-instagram" },
+            facebook: { label: "Facebook", icon: "fa-brands fa-facebook-f", theme: "icon-facebook" },
+            youtube: { label: "YouTube", icon: "fa-brands fa-youtube", theme: "icon-youtube" },
+            telegram: { label: "Telegram", icon: "fa-brands fa-telegram", theme: "icon-telegram" },
+            whatsapp: { label: "WhatsApp", icon: "fa-brands fa-whatsapp", theme: "icon-whatsapp" },
+            tiktok: { label: "TikTok", icon: "fa-brands fa-tiktok", theme: "icon-tiktok" },
+            link: { label: "Other Link", icon: "fa-solid fa-link", theme: "icon-link" }
+        };
+        const DEFAULT_DATA = {
+            adminPassword: "123",
+            name: "Melat Wolde",
+            organization: "Melat's Gift Shop",
+            title: "Actress & Business Woman",
+            bio: "Actress, creator, and business woman behind Melat's Gift Shop.",
+            image: "https://i.ibb.co/sGZVzgq/IMG-9715.jpg",
+            logo: "https://i.ibb.co/4R5wZ5yh/and-many-more.png",
+            portfolio: "",
+            phones: ["0962185060"],
+            emails: [],
+            website: "",
+            location: "",
+            qrLink: "",
+            socialLinks: [
+                { group: "shop", platform: "instagram", url: "https://www.instagram.com/melatsgiftshop?igsh=azlxbjgxdWh1YWJy&utm_source=qr" },
+                { group: "shop", platform: "telegram", url: "https://t.me/Melatsgiftshop" },
+                { group: "shop", platform: "tiktok", url: "https://www.tiktok.com/@melatsgiftshop?_r=1" },
+                { group: "personal", platform: "instagram", url: "https://www.instagram.com/melat__wolde?igsh=NGhxZGRzY2JnNG9r" },
+                { group: "personal", platform: "tiktok", url: "https://www.tiktok.com/@melat_wolde?_r=1&_t=ZM-91uMPOc6Ktc" },
+                { group: "personal", platform: "youtube", url: "https://www.youtube.com/@melatwolde_7407" },
+                { group: "personal", platform: "facebook", url: "https://www.facebook.com/melat.wolde.149486" }
+            ],
+            customLinks: [],
+            colors: {
+                cardBg: "#010203",
+                coverBg: "#0a0a0a",
+                accent: "#ffff00",
+                name: "#ffffff",
+                org: "#ffff00",
+                title: "#9ca3af",
+                bio: "#d1d5db",
+                contactBtnBg: "#000000",
+                contactBtnText: "#ffff00",
+                utilBtnBg: "#111827",
+                utilBtnText: "#f3f4f6",
+                primaryBtnBg: "#ffff00",
+                primaryBtnText: "#000000"
+            }
+        };
 
-        function showMessage(text) {
+        let CONTACT_DATA = { ...DEFAULT_DATA };
+        let isCloudSynced = false;
+        let firebaseClient = null;
+        let syncUnsubscribe = null;
+        let profileImagePreviewBase64 = "";
+        let logoImagePreviewBase64 = "";
+        let portfolioPreviewBase64 = "";
+        let messageTimer;
+
+        const messageBox = document.getElementById("messageBox");
+        const syncStatus = document.getElementById("syncStatus");
+        const adminModal = document.getElementById("adminModal");
+        const loginView = document.getElementById("loginView");
+        const dashboardView = document.getElementById("dashboardView");
+        const adminPasswordInput = document.getElementById("adminPassword");
+
+        function refreshIcons() {
+            if (window.lucide && typeof window.lucide.createIcons === "function") {
+                window.lucide.createIcons();
+            }
+        }
+
+        function scheduleTask(task) {
+            if ("requestIdleCallback" in window) {
+                window.requestIdleCallback(() => task(), { timeout: 1200 });
+            } else {
+                window.setTimeout(task, 32);
+            }
+        }
+
+        function escapeHtml(value) {
+            return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;"
+            }[char]));
+        }
+
+        function normalizePhone(value) {
+            return String(value || "").replace(/[^\d+]/g, "");
+        }
+
+        function toWhatsappNumber(value) {
+            const digits = String(value || "").replace(/[^\d]/g, "");
+            if (!digits) return "";
+            if (digits.startsWith("251")) return digits;
+            if (digits.startsWith("0")) return `251${digits.slice(1)}`;
+            if (digits.length === 9) return `251${digits}`;
+            return digits;
+        }
+
+        function showMessage(text, type = "info") {
+            clearTimeout(messageTimer);
             messageBox.textContent = text;
-            messageBox.classList.remove('hidden');
-            messageBox.classList.add('bg-gray-800', 'text-[#FFFF00]', 'border', 'border-[#FFFF00]', 'scale-100');
-            setTimeout(() => { messageBox.classList.add('hidden'); }, 3000);
+            messageBox.className = "fixed top-4 left-1/2 z-50 -translate-x-1/2 rounded-xl border px-4 py-3 text-sm font-semibold shadow-2xl";
+            if (type === "error") {
+                messageBox.classList.add("bg-red-950/95", "text-red-100", "border-red-500");
+            } else {
+                messageBox.classList.add("bg-gray-900/95", "text-[#FFFF99]", "border-[#FFFF00]");
+            }
+            messageBox.classList.remove("hidden");
+            messageTimer = setTimeout(() => messageBox.classList.add("hidden"), 3200);
+        }
+
+        function setSyncStatus(text, isOnline) {
+            syncStatus.textContent = text;
+            syncStatus.className = isOnline ? "status-online" : "status-offline";
+            syncStatus.id = "syncStatus";
+        }
+
+        function normalizeContactData(data = {}) {
+            const merged = {
+                ...DEFAULT_DATA,
+                ...data,
+                colors: {
+                    ...DEFAULT_DATA.colors,
+                    ...(data.colors || {})
+                }
+            };
+            merged.phones = Array.isArray(merged.phones) ? merged.phones : [];
+            merged.emails = Array.isArray(merged.emails) ? merged.emails : [];
+            merged.socialLinks = Array.isArray(merged.socialLinks) ? merged.socialLinks : [];
+            merged.customLinks = Array.isArray(merged.customLinks) ? merged.customLinks : [];
+            merged.portfolio = typeof merged.portfolio === "string" ? merged.portfolio : "";
+            merged.qrLink = typeof merged.qrLink === "string" ? merged.qrLink : "";
+            merged.website = typeof merged.website === "string" ? merged.website : "";
+            merged.location = typeof merged.location === "string" ? merged.location : "";
+            merged.bio = typeof merged.bio === "string" ? merged.bio : "";
+            merged.socialLinks = merged.socialLinks.map((item) => ({
+                group: item.group === "personal" ? "personal" : "shop",
+                platform: PLATFORMS[item.platform] ? item.platform : "link",
+                url: typeof item.url === "string" ? item.url : ""
+            }));
+            merged.customLinks = merged.customLinks.map((item) => ({
+                label: typeof item.label === "string" ? item.label : "",
+                url: typeof item.url === "string" ? item.url : ""
+            }));
+            return merged;
+        }
+
+        function cacheContactData(data) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        }
+
+        function loadLocalData() {
+            const cached = localStorage.getItem(STORAGE_KEY);
+            if (cached) {
+                try {
+                    CONTACT_DATA = normalizeContactData(JSON.parse(cached));
+                } catch (error) {
+                    CONTACT_DATA = normalizeContactData(DEFAULT_DATA);
+                }
+            } else {
+                CONTACT_DATA = normalizeContactData(DEFAULT_DATA);
+            }
+            profileImagePreviewBase64 = CONTACT_DATA.image || "";
+            logoImagePreviewBase64 = CONTACT_DATA.logo || "";
+            portfolioPreviewBase64 = CONTACT_DATA.portfolio || "";
+            renderUI();
+        }
+
+        function applyThemeColors() {
+            const colors = CONTACT_DATA.colors || DEFAULT_DATA.colors;
+            const root = document.documentElement.style;
+            root.setProperty("--card-bg", colors.cardBg);
+            root.setProperty("--cover-bg", colors.coverBg);
+            root.setProperty("--accent", colors.accent);
+            root.setProperty("--name", colors.name);
+            root.setProperty("--org", colors.org);
+            root.setProperty("--title", colors.title);
+            root.setProperty("--bio", colors.bio);
+            root.setProperty("--contact-btn-bg", colors.contactBtnBg);
+            root.setProperty("--contact-btn-text", colors.contactBtnText);
+            root.setProperty("--util-btn-bg", colors.utilBtnBg);
+            root.setProperty("--util-btn-text", colors.utilBtnText);
+            root.setProperty("--primary-btn-bg", colors.primaryBtnBg);
+            root.setProperty("--primary-btn-text", colors.primaryBtnText);
+            document.getElementById("contactName").style.color = colors.name;
+            document.getElementById("contactOrg").style.color = colors.org;
+            document.getElementById("contactTitle").style.color = colors.title;
+            document.getElementById("contactBio").style.color = colors.bio;
+        }
+
+        function renderMeta() {
+            const metaTitle = `${CONTACT_DATA.name || "Melat Wolde"} | ${CONTACT_DATA.organization || "Digital Business Card"}`;
+            const metaDescription = CONTACT_DATA.bio || `Digital Business Card for ${CONTACT_DATA.name || "Melat Wolde"}.`;
+            document.title = metaTitle;
+            document.querySelector('meta[name="description"]').setAttribute("content", metaDescription);
+            document.querySelector('meta[name="theme-color"]').setAttribute("content", CONTACT_DATA.colors.cardBg || "#010203");
+            document.querySelector('meta[property="og:title"]').setAttribute("content", `${CONTACT_DATA.name || "Melat Wolde"} - Digital Business Card`);
+            document.querySelector('meta[property="og:description"]').setAttribute("content", metaDescription);
+            document.querySelector('meta[property="og:image"]').setAttribute("content", CONTACT_DATA.image || DEFAULT_DATA.image);
+        }
+
+        function renderQuickActions() {
+            const primaryPhone = CONTACT_DATA.phones[0] || "";
+            const whatsappBtn = document.getElementById("whatsappBtn");
+            const smsBtn = document.getElementById("smsBtn");
+            const quickActionRow = document.getElementById("quickActionRow");
+            const whatsappNumber = toWhatsappNumber(primaryPhone);
+            const smsNumber = normalizePhone(primaryPhone);
+            const hasQuickAction = Boolean(whatsappNumber || smsNumber);
+            quickActionRow.classList.toggle("hidden", !hasQuickAction);
+            whatsappBtn.classList.toggle("hidden", !whatsappNumber);
+            smsBtn.classList.toggle("hidden", !smsNumber);
+            if (whatsappNumber) whatsappBtn.href = `https://wa.me/${whatsappNumber}`;
+            if (smsNumber) smsBtn.href = `sms:${smsNumber}`;
         }
 
         function renderPhones() {
-            const container = document.getElementById('phoneListContainer');
-            container.innerHTML = phoneNumbers.map(phone => `
-                <a href="tel:${phone.replace(/\s/g, '')}" class="contact-btn flex items-center justify-center p-3 bg-black text-[#FFFF00] font-bold rounded-xl">
-                    <i data-lucide="phone" class="w-5 h-5 mr-3"></i>
-                    Call: ${phone}
-                </a>
-            `).join('');
-
-            const adminList = document.getElementById('adminPhoneList');
-            adminList.innerHTML = phoneNumbers.map((phone, index) => `
-                <div class="flex items-center justify-between bg-black p-2 px-3 rounded-lg border border-gray-800">
-                    <span class="text-white text-sm font-mono">${phone}</span>
-                    <button onclick="removePhone(${index})" class="text-red-500 hover:bg-red-500/10 p-1 rounded">
-                        <i data-lucide="trash-2" class="w-4 h-4"></i>
-                    </button>
-                </div>
-            `).join('');
-
-            lucide.createIcons();
-            localStorage.setItem('melat_phones', JSON.stringify(phoneNumbers));
-        }
-
-        window.removePhone = (index) => {
-            if (phoneNumbers.length <= 1) {
-                showMessage("Must have at least one phone number");
+            const container = document.getElementById("phoneListContainer");
+            if (!(CONTACT_DATA.phones || []).length) {
+                container.innerHTML = "";
+                container.classList.add("hidden");
                 return;
             }
-            phoneNumbers.splice(index, 1);
+            container.classList.remove("hidden");
+            container.innerHTML = (CONTACT_DATA.phones || []).map((phone) => `
+                <a href="tel:${normalizePhone(phone)}" class="contact-btn flex items-center justify-center rounded-xl px-4 py-3 text-sm font-bold">
+                    <i data-lucide="phone" class="mr-3 h-5 w-5"></i>
+                    Call: ${escapeHtml(phone)}
+                </a>
+            `).join("");
+        }
+
+        function renderEmails() {
+            const container = document.getElementById("emailListContainer");
+            if (!(CONTACT_DATA.emails || []).length) {
+                container.innerHTML = "";
+                container.classList.add("hidden");
+                return;
+            }
+            container.classList.remove("hidden");
+            container.innerHTML = (CONTACT_DATA.emails || []).map((email) => `
+                <a href="mailto:${escapeHtml(email)}" class="contact-btn flex items-center justify-center rounded-xl px-4 py-3 text-sm font-bold">
+                    <i data-lucide="mail" class="mr-3 h-5 w-5"></i>
+                    Email: ${escapeHtml(email)}
+                </a>
+            `).join("");
+        }
+        function renderMainButtons() {
+            const row = document.getElementById("mainBtnRow");
+            const websiteBtn = document.getElementById("btnWebsite");
+            const locationBtn = document.getElementById("btnLocation");
+            const portfolioBtn = document.getElementById("btnPortfolio");
+            const hasWebsite = Boolean((CONTACT_DATA.website || "").trim());
+            const hasLocation = Boolean((CONTACT_DATA.location || "").trim());
+            const hasPortfolio = Boolean((CONTACT_DATA.portfolio || "").trim());
+            websiteBtn.classList.toggle("hidden", !hasWebsite);
+            locationBtn.classList.toggle("hidden", !hasLocation);
+            portfolioBtn.classList.toggle("hidden", !hasPortfolio);
+            if (hasWebsite) websiteBtn.href = CONTACT_DATA.website;
+            if (hasLocation) locationBtn.href = CONTACT_DATA.location;
+            row.classList.toggle("hidden", !(hasWebsite || hasLocation || hasPortfolio));
+        }
+
+        function getSocialIconMarkup(platform) {
+            const meta = PLATFORMS[platform] || PLATFORMS.link;
+            return `<i class="${meta.icon}"></i>`;
+        }
+
+        function renderSocialGroup(group, sectionId, containerId) {
+            const section = document.getElementById(sectionId);
+            const container = document.getElementById(containerId);
+            const links = (CONTACT_DATA.socialLinks || []).filter((item) => item.group === group && item.url && item.url.trim() !== "");
+            if (!links.length) {
+                section.classList.add("hidden-view");
+                container.innerHTML = "";
+                return 0;
+            }
+            section.classList.remove("hidden-view");
+            container.innerHTML = links.map((item) => {
+                const meta = PLATFORMS[item.platform] || PLATFORMS.link;
+                return `<a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(meta.label)}" class="social-icon ${meta.theme}">${getSocialIconMarkup(item.platform)}</a>`;
+            }).join("");
+            return links.length;
+        }
+
+        function renderCustomLinks() {
+            const container = document.getElementById("customLinksContainer");
+            const links = (CONTACT_DATA.customLinks || []).filter((item) => item.url && item.url.trim() !== "");
+            if (!links.length) {
+                container.innerHTML = "";
+                container.classList.add("hidden");
+                return;
+            }
+            container.classList.remove("hidden");
+            container.innerHTML = links.map((item) => `
+                <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer" class="util-btn inline-flex items-center rounded-full px-4 py-2 text-xs font-bold">
+                    <i data-lucide="link" class="mr-2 h-4 w-4"></i>
+                    ${escapeHtml(item.label || "Link")}
+                </a>
+            `).join("");
+        }
+
+        function renderSocialBlock() {
+            const shopCount = renderSocialGroup("shop", "shopSocialSection", "shopSocialContainer");
+            const personalCount = renderSocialGroup("personal", "personalSocialSection", "personalSocialContainer");
+            renderCustomLinks();
+            const hasCustom = (CONTACT_DATA.customLinks || []).some((item) => item.url && item.url.trim() !== "");
+            document.getElementById("socialBlock").classList.toggle("hidden", !(shopCount || personalCount || hasCustom));
+        }
+
+        function renderUI() {
+            CONTACT_DATA = normalizeContactData(CONTACT_DATA);
+            applyThemeColors();
+            renderMeta();
+            document.getElementById("contactName").textContent = CONTACT_DATA.name;
+            document.getElementById("contactOrg").textContent = CONTACT_DATA.organization;
+            document.getElementById("contactTitle").textContent = CONTACT_DATA.title;
+            document.getElementById("contactBio").textContent = CONTACT_DATA.bio;
+            document.getElementById("contactBio").classList.toggle("hidden", !(CONTACT_DATA.bio || "").trim());
+            document.getElementById("profilePicture").src = CONTACT_DATA.image || DEFAULT_DATA.image;
+            document.getElementById("businessLogo").src = CONTACT_DATA.logo || DEFAULT_DATA.logo;
+            renderQuickActions();
             renderPhones();
-        };
+            renderEmails();
+            renderMainButtons();
+            renderSocialBlock();
+            refreshIcons();
+        }
 
-        // Admin Logic
-        const adminLoginBtn = document.getElementById('adminLoginBtn');
-        const adminModal = document.getElementById('adminModal');
-        const loginView = document.getElementById('loginView');
-        const dashboardView = document.getElementById('dashboardView');
-        const adminPassword = document.getElementById('adminPassword');
-        
-        adminLoginBtn.addEventListener('click', () => {
-            adminModal.classList.remove('hidden');
-            if (document.body.classList.contains('is-admin')) {
-                loginView.classList.add('hidden');
-                dashboardView.classList.remove('hidden');
+        function getEffectiveQrTarget() {
+            const customQrLink = (CONTACT_DATA.qrLink || "").trim();
+            if (customQrLink) return customQrLink;
+            if ((CONTACT_DATA.website || "").trim()) return CONTACT_DATA.website.trim();
+            if (window.location.protocol === "file:") return "";
+            return window.location.href.split("#")[0];
+        }
+
+        function closePortfolioModal() { document.getElementById("portfolioModal").classList.add("hidden-view"); }
+        function closeQrModal() { document.getElementById("qrModal").classList.add("hidden-view"); }
+
+        function openPortfolioModal() {
+            if (!(CONTACT_DATA.portfolio || "").trim()) {
+                showMessage("No portfolio image added yet.", "error");
+                return;
+            }
+            document.getElementById("portfolioImageView").src = CONTACT_DATA.portfolio;
+            document.getElementById("portfolioModal").classList.remove("hidden-view");
+        }
+
+        function openQrModal() {
+            const qrTargetUrl = getEffectiveQrTarget();
+            if (!qrTargetUrl) {
+                showMessage("Add a website or custom QR link first.", "error");
+                return;
+            }
+            const qrTarget = document.getElementById("qrCodeTarget");
+            qrTarget.innerHTML = "";
+            if (typeof window.QRCode !== "function") {
+                qrTarget.innerHTML = '<div class="text-sm font-semibold text-red-500">QR code library could not load.</div>';
             } else {
-                loginView.classList.remove('hidden');
-                dashboardView.classList.add('hidden');
-                adminPassword.focus();
+                new window.QRCode(qrTarget, { text: qrTargetUrl, width: 220, height: 220 });
             }
-        });
+            document.getElementById("qrModal").classList.remove("hidden-view");
+        }
 
-        document.getElementById('confirmLogin').addEventListener('click', () => {
-            if (adminPassword.value === '123') {
-                document.body.classList.add('is-admin');
-                loginView.classList.add('hidden');
-                dashboardView.classList.remove('hidden');
-                adminPassword.value = '';
-                showMessage('Dashboard Unlocked');
+        function isAdminSession() {
+            return sessionStorage.getItem(SESSION_KEY) === "true";
+        }
+
+        function applyAdminSession(enabled) {
+            document.body.classList.toggle("is-admin", enabled);
+            if (enabled) sessionStorage.setItem(SESSION_KEY, "true");
+            else sessionStorage.removeItem(SESSION_KEY);
+        }
+
+        function openAdminModal() {
+            adminModal.classList.remove("hidden-view");
+            if (isAdminSession()) {
+                loginView.classList.add("hidden-view");
+                dashboardView.classList.remove("hidden-view");
+                populateDashboard();
             } else {
-                showMessage('Incorrect password');
-                adminPassword.value = '';
+                loginView.classList.remove("hidden-view");
+                dashboardView.classList.add("hidden-view");
+                adminPasswordInput.value = "";
+                adminPasswordInput.focus();
             }
-        });
+        }
 
-        document.getElementById('logoutBtn').addEventListener('click', () => {
-            document.body.classList.remove('is-admin');
-            adminModal.classList.add('hidden');
-            showMessage('Logged out');
-        });
+        function closeAdminModal() {
+            adminModal.classList.add("hidden-view");
+        }
 
-        document.getElementById('cancelLogin').addEventListener('click', () => {
-            adminModal.classList.add('hidden');
-        });
+        function createRowBase(className, content) {
+            const wrapper = document.createElement("div");
+            wrapper.className = className;
+            wrapper.innerHTML = content;
+            return wrapper;
+        }
 
-        document.getElementById('addPhoneBtn').addEventListener('click', () => {
-            const input = document.getElementById('newPhoneInput');
-            const val = input.value.trim();
-            if (val) {
-                phoneNumbers.push(val);
-                input.value = '';
-                renderPhones();
-                showMessage('Phone number added');
+        function attachRemoveButton(wrapper) {
+            const button = wrapper.querySelector(".remove-row");
+            if (button) {
+                button.addEventListener("click", () => {
+                    wrapper.remove();
+                    refreshIcons();
+                });
             }
-        });
+        }
 
-        // Image Direct Click Handlers
-        document.getElementById('logoEditWrapper').addEventListener('click', () => {
-            if (document.body.classList.contains('is-admin')) document.getElementById('logoInput').click();
-        });
+        function createPhoneRow(value = "") {
+            const wrapper = createRowBase("flex items-center gap-2", `
+                <input type="text" class="phone-input dashboard-input text-sm" value="${escapeHtml(value)}" placeholder="Phone number">
+                <button type="button" class="remove-row rounded-xl border border-red-900/70 bg-red-950/40 p-3 text-red-200 transition-colors hover:bg-red-900/50">
+                    <i data-lucide="trash-2" class="h-4 w-4"></i>
+                </button>
+            `);
+            attachRemoveButton(wrapper);
+            document.getElementById("adminPhoneList").appendChild(wrapper);
+            refreshIcons();
+        }
 
-        document.getElementById('profileEditWrapper').addEventListener('click', () => {
-            if (document.body.classList.contains('is-admin')) document.getElementById('profileInput').click();
-        });
+        function createEmailRow(value = "") {
+            const wrapper = createRowBase("flex items-center gap-2", `
+                <input type="email" class="email-input dashboard-input text-sm" value="${escapeHtml(value)}" placeholder="Email address">
+                <button type="button" class="remove-row rounded-xl border border-red-900/70 bg-red-950/40 p-3 text-red-200 transition-colors hover:bg-red-900/50">
+                    <i data-lucide="trash-2" class="h-4 w-4"></i>
+                </button>
+            `);
+            attachRemoveButton(wrapper);
+            document.getElementById("adminEmailList").appendChild(wrapper);
+            refreshIcons();
+        }
 
-        // Unified Image Change Logic
-        document.getElementById('logoInput').addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
+        function createCustomLinkRow(label = "", url = "") {
+            const wrapper = createRowBase("rounded-2xl border border-gray-800 bg-black p-3", `
+                <div class="grid grid-cols-1 gap-3 md:grid-cols-[0.9fr_1.1fr_auto]">
+                    <input type="text" class="custom-link-label dashboard-input text-sm" value="${escapeHtml(label)}" placeholder="Label">
+                    <input type="url" class="custom-link-url dashboard-input text-sm" value="${escapeHtml(url)}" placeholder="https://">
+                    <button type="button" class="remove-row rounded-xl border border-red-900/70 bg-red-950/40 px-4 py-3 text-red-200 transition-colors hover:bg-red-900/50">
+                        <i data-lucide="trash-2" class="h-4 w-4"></i>
+                    </button>
+                </div>
+            `);
+            attachRemoveButton(wrapper);
+            document.getElementById("editCustomLinksList").appendChild(wrapper);
+            refreshIcons();
+        }
+
+        function createSocialRow(group = "shop", platform = "instagram", url = "") {
+            const wrapper = createRowBase("rounded-2xl border border-gray-800 bg-black p-3", `
+                <div class="grid grid-cols-1 gap-3 md:grid-cols-[0.8fr_0.9fr_1.3fr_auto]">
+                    <select class="social-group dashboard-select text-sm">
+                        <option value="shop" ${group === "shop" ? "selected" : ""}>Shop</option>
+                        <option value="personal" ${group === "personal" ? "selected" : ""}>Personal</option>
+                    </select>
+                    <select class="social-platform dashboard-select text-sm">
+                        ${Object.keys(PLATFORMS).map((key) => `<option value="${key}" ${key === platform ? "selected" : ""}>${PLATFORMS[key].label}</option>`).join("")}
+                    </select>
+                    <input type="url" class="social-url dashboard-input text-sm" value="${escapeHtml(url)}" placeholder="https://">
+                    <button type="button" class="remove-row rounded-xl border border-red-900/70 bg-red-950/40 px-4 py-3 text-red-200 transition-colors hover:bg-red-900/50">
+                        <i data-lucide="trash-2" class="h-4 w-4"></i>
+                    </button>
+                </div>
+            `);
+            attachRemoveButton(wrapper);
+            document.getElementById("editSocialsList").appendChild(wrapper);
+            refreshIcons();
+        }
+
+        function populateDashboard() {
+            document.getElementById("editName").value = CONTACT_DATA.name || "";
+            document.getElementById("editOrg").value = CONTACT_DATA.organization || "";
+            document.getElementById("editTitle").value = CONTACT_DATA.title || "";
+            document.getElementById("editBio").value = CONTACT_DATA.bio || "";
+            document.getElementById("editWebsite").value = CONTACT_DATA.website || "";
+            document.getElementById("editLocation").value = CONTACT_DATA.location || "";
+            document.getElementById("editQrLink").value = CONTACT_DATA.qrLink || "";
+            document.getElementById("editAdminPassword").value = CONTACT_DATA.adminPassword || "";
+            document.getElementById("editAdminPasswordConfirm").value = CONTACT_DATA.adminPassword || "";
+            document.getElementById("editProfilePreview").src = CONTACT_DATA.image || DEFAULT_DATA.image;
+            document.getElementById("editLogoPreview").src = CONTACT_DATA.logo || DEFAULT_DATA.logo;
+            document.getElementById("editPortfolioPreview").src = CONTACT_DATA.portfolio || "https://placehold.co/400x280/020617/64748B?text=Portfolio";
+            profileImagePreviewBase64 = CONTACT_DATA.image || "";
+            logoImagePreviewBase64 = CONTACT_DATA.logo || "";
+            portfolioPreviewBase64 = CONTACT_DATA.portfolio || "";
+            const colors = CONTACT_DATA.colors || DEFAULT_DATA.colors;
+            document.getElementById("colorCardBg").value = colors.cardBg;
+            document.getElementById("colorCoverBg").value = colors.coverBg;
+            document.getElementById("colorAccent").value = colors.accent;
+            document.getElementById("colorName").value = colors.name;
+            document.getElementById("colorOrg").value = colors.org;
+            document.getElementById("colorTitle").value = colors.title;
+            document.getElementById("colorBio").value = colors.bio;
+            document.getElementById("colorContactBtnBg").value = colors.contactBtnBg;
+            document.getElementById("colorContactBtnText").value = colors.contactBtnText;
+            document.getElementById("colorUtilBtnBg").value = colors.utilBtnBg;
+            document.getElementById("colorUtilBtnText").value = colors.utilBtnText;
+            document.getElementById("colorPrimaryBtnBg").value = colors.primaryBtnBg;
+            document.getElementById("colorPrimaryBtnText").value = colors.primaryBtnText;
+            document.getElementById("adminPhoneList").innerHTML = "";
+            (CONTACT_DATA.phones || []).forEach((phone) => createPhoneRow(phone));
+            if (!(CONTACT_DATA.phones || []).length) createPhoneRow();
+            document.getElementById("adminEmailList").innerHTML = "";
+            (CONTACT_DATA.emails || []).forEach((email) => createEmailRow(email));
+            if (!(CONTACT_DATA.emails || []).length) createEmailRow();
+            document.getElementById("editCustomLinksList").innerHTML = "";
+            (CONTACT_DATA.customLinks || []).forEach((item) => createCustomLinkRow(item.label, item.url));
+            document.getElementById("editSocialsList").innerHTML = "";
+            (CONTACT_DATA.socialLinks || []).forEach((item) => createSocialRow(item.group, item.platform, item.url));
+            refreshIcons();
+        }
+
+        function gatherRows(selector, mapFn) {
+            return Array.from(document.querySelectorAll(selector)).map(mapFn);
+        }
+        async function saveProfileToCloud(data) {
+            if (!isCloudSynced || !firebaseClient) return;
+            const docRef = firebaseClient.doc(firebaseClient.db, "artifacts", appId, "public", "data", "profiles", "main");
+            setSyncStatus("SYNC: SAVING", true);
+            try {
+                await firebaseClient.setDoc(docRef, data);
+                setSyncStatus("SYNC: CONNECTED", true);
+            } catch (error) {
+                setSyncStatus("SYNC: OFFLINE", false);
+                showMessage("Changes saved only on this device right now.", "error");
+            }
+        }
+
+        async function initCloudClient() {
+            if (firebaseClient) return firebaseClient;
+            const [appModule, authModule, firestoreModule] = await Promise.all([
+                import("https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js"),
+                import("https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js"),
+                import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js")
+            ]);
+            const app = appModule.initializeApp(firebaseConfig);
+            firebaseClient = {
+                auth: authModule.getAuth(app),
+                db: firestoreModule.getFirestore(app),
+                signInAnonymously: authModule.signInAnonymously,
+                onAuthStateChanged: authModule.onAuthStateChanged,
+                doc: firestoreModule.doc,
+                setDoc: firestoreModule.setDoc,
+                onSnapshot: firestoreModule.onSnapshot
+            };
+            return firebaseClient;
+        }
+
+        function startSync() {
+            if (!firebaseClient) return;
+            if (syncUnsubscribe) syncUnsubscribe();
+            const docRef = firebaseClient.doc(firebaseClient.db, "artifacts", appId, "public", "data", "profiles", "main");
+            syncUnsubscribe = firebaseClient.onSnapshot(docRef, (snapshot) => {
+                if (snapshot.exists()) {
+                    CONTACT_DATA = normalizeContactData(snapshot.data());
+                    cacheContactData(CONTACT_DATA);
+                    renderUI();
+                    if (isAdminSession()) populateDashboard();
+                } else {
+                    firebaseClient.setDoc(docRef, normalizeContactData(DEFAULT_DATA));
+                }
+            }, () => setSyncStatus("SYNC: OFFLINE", false));
+        }
+
+        async function initAuth() {
+            try {
+                setSyncStatus("SYNC: LOADING", false);
+                const client = await initCloudClient();
+                client.onAuthStateChanged(client.auth, (user) => {
+                    if (user) {
+                        isCloudSynced = true;
+                        setSyncStatus("SYNC: CONNECTED", true);
+                        startSync();
+                    } else if (!isCloudSynced) {
+                        setSyncStatus("SYNC: OFFLINE", false);
+                    }
+                });
+                await client.signInAnonymously(client.auth);
+            } catch (error) {
+                isCloudSynced = false;
+                setSyncStatus("SYNC: OFFLINE", false);
+            }
+        }
+
+        function bindImageInput(inputEl, previewEl, assignValue, successText) {
+            inputEl.addEventListener("change", (event) => {
+                const file = event.target.files[0];
+                if (!file) return;
+                if (!/^image\//i.test(file.type)) {
+                    showMessage("Please select an image file.", "error");
+                    inputEl.value = "";
+                    return;
+                }
                 const reader = new FileReader();
-                reader.onload = (event) => { 
-                    document.getElementById('businessLogo').src = event.target.result; 
-                    showMessage('Logo updated'); 
+                reader.onload = (loadEvent) => {
+                    const result = loadEvent.target.result;
+                    if (previewEl) previewEl.src = result;
+                    assignValue(typeof result === "string" ? result : "");
+                    showMessage(successText);
                 };
                 reader.readAsDataURL(file);
-            }
-        });
-
-        document.getElementById('profileInput').addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (event) => { 
-                    document.getElementById('profilePicture').src = event.target.result; 
-                    showMessage('Profile picture updated'); 
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // Utility Buttons
-        document.getElementById('downloadButton').addEventListener('click', () => {
-            const card = document.getElementById('id-card-content');
-            showMessage('Generating image...');
-            html2canvas(card, { scale: 3, useCORS: true, backgroundColor: '#010203', borderRadius: 24 }).then(canvas => {
-                const link = document.createElement('a');
-                link.href = canvas.toDataURL('image/png');
-                link.download = 'Melat_Wolde_BusinessCard.png';
-                link.click();
             });
+        }
+
+        document.getElementById("pickProfileImageBtn").addEventListener("click", () => document.getElementById("profileInput").click());
+        document.getElementById("pickLogoImageBtn").addEventListener("click", () => document.getElementById("logoInput").click());
+        document.getElementById("pickPortfolioBtn").addEventListener("click", () => document.getElementById("portfolioInput").click());
+        document.getElementById("clearPortfolioBtn").addEventListener("click", () => {
+            portfolioPreviewBase64 = "";
+            document.getElementById("editPortfolioPreview").src = "https://placehold.co/400x280/020617/64748B?text=Portfolio";
+            showMessage("Portfolio image cleared.");
         });
 
-        document.getElementById('vcfButton').addEventListener('click', () => {
-            let vcf = `BEGIN:VCARD\nVERSION:3.0\nFN:Melat Wolde\nORG:Melat's Gift Shop\nTITLE:Actress & Business Woman\n${phoneNumbers.map(p => `TEL:${p}`).join('\n')}\nURL:https://t.me/Melatsgiftshop\nEND:VCARD`;
-            const blob = new Blob([vcf], { type: 'text/vcard' });
-            const link = document.createElement('a');
+        bindImageInput(document.getElementById("profileInput"), document.getElementById("editProfilePreview"), (value) => { profileImagePreviewBase64 = value; }, "Profile image updated.");
+        bindImageInput(document.getElementById("logoInput"), document.getElementById("editLogoPreview"), (value) => { logoImagePreviewBase64 = value; }, "Company logo updated.");
+        bindImageInput(document.getElementById("portfolioInput"), document.getElementById("editPortfolioPreview"), (value) => { portfolioPreviewBase64 = value; }, "Portfolio image updated.");
+
+        document.getElementById("adminLoginBtn").addEventListener("click", openAdminModal);
+        document.getElementById("cancelLogin").addEventListener("click", closeAdminModal);
+        document.getElementById("closeDashboardBtn").addEventListener("click", closeAdminModal);
+        document.getElementById("adminBackdrop").addEventListener("click", closeAdminModal);
+
+        document.getElementById("confirmLogin").addEventListener("click", () => {
+            if (adminPasswordInput.value === CONTACT_DATA.adminPassword) {
+                applyAdminSession(true);
+                loginView.classList.add("hidden-view");
+                dashboardView.classList.remove("hidden-view");
+                populateDashboard();
+                adminPasswordInput.value = "";
+                showMessage("Dashboard unlocked.");
+            } else {
+                showMessage("Incorrect password.", "error");
+                adminPasswordInput.value = "";
+            }
+        });
+
+        document.getElementById("logoutBtn").addEventListener("click", () => {
+            applyAdminSession(false);
+            closeAdminModal();
+            showMessage("Logged out.");
+        });
+        document.getElementById("clearQrLinkBtn").addEventListener("click", () => { document.getElementById("editQrLink").value = ""; });
+        document.getElementById("addPhoneBtn").addEventListener("click", () => createPhoneRow());
+        document.getElementById("addEmailBtn").addEventListener("click", () => createEmailRow());
+        document.getElementById("addSocialBtn").addEventListener("click", () => createSocialRow());
+        document.getElementById("addCustomLinkBtn").addEventListener("click", () => createCustomLinkRow());
+
+        document.getElementById("logoEditWrapper").addEventListener("click", () => {
+            if (document.body.classList.contains("is-admin")) document.getElementById("logoInput").click();
+        });
+        document.getElementById("profileEditWrapper").addEventListener("click", () => {
+            if (document.body.classList.contains("is-admin")) document.getElementById("profileInput").click();
+        });
+
+        document.getElementById("btnPortfolio").addEventListener("click", openPortfolioModal);
+        document.getElementById("portfolioCloseBtn").addEventListener("click", closePortfolioModal);
+        document.querySelector("[data-close-portfolio='true']").addEventListener("click", closePortfolioModal);
+        document.getElementById("qrOpenBtn").addEventListener("click", openQrModal);
+        document.getElementById("qrCloseBtn").addEventListener("click", closeQrModal);
+        document.querySelector("[data-close-qr='true']").addEventListener("click", closeQrModal);
+
+        document.getElementById("saveEdit").addEventListener("click", async () => {
+            const password1 = document.getElementById("editAdminPassword").value;
+            const password2 = document.getElementById("editAdminPasswordConfirm").value;
+            if (!password1.trim()) {
+                showMessage("Admin password cannot be empty.", "error");
+                return;
+            }
+            if (password1 !== password2) {
+                showMessage("Passwords do not match.", "error");
+                return;
+            }
+            const phones = gatherRows("#adminPhoneList .phone-input", (input) => input.value.trim()).filter(Boolean);
+            const emails = gatherRows("#adminEmailList .email-input", (input) => input.value.trim()).filter(Boolean);
+            const customLinks = gatherRows("#editCustomLinksList > div", (row) => ({
+                label: row.querySelector(".custom-link-label").value.trim(),
+                url: row.querySelector(".custom-link-url").value.trim()
+            })).filter((item) => item.url);
+            const socialLinks = gatherRows("#editSocialsList > div", (row) => ({
+                group: row.querySelector(".social-group").value,
+                platform: row.querySelector(".social-platform").value,
+                url: row.querySelector(".social-url").value.trim()
+            })).filter((item) => item.url);
+            CONTACT_DATA = normalizeContactData({
+                ...CONTACT_DATA,
+                adminPassword: password1.trim(),
+                name: document.getElementById("editName").value.trim() || DEFAULT_DATA.name,
+                organization: document.getElementById("editOrg").value.trim() || DEFAULT_DATA.organization,
+                title: document.getElementById("editTitle").value.trim() || DEFAULT_DATA.title,
+                bio: document.getElementById("editBio").value.trim(),
+                website: document.getElementById("editWebsite").value.trim(),
+                location: document.getElementById("editLocation").value.trim(),
+                qrLink: document.getElementById("editQrLink").value.trim(),
+                image: profileImagePreviewBase64 || CONTACT_DATA.image || DEFAULT_DATA.image,
+                logo: logoImagePreviewBase64 || CONTACT_DATA.logo || DEFAULT_DATA.logo,
+                portfolio: portfolioPreviewBase64 || "",
+                phones,
+                emails,
+                customLinks,
+                socialLinks,
+                colors: {
+                    cardBg: document.getElementById("colorCardBg").value,
+                    coverBg: document.getElementById("colorCoverBg").value,
+                    accent: document.getElementById("colorAccent").value,
+                    name: document.getElementById("colorName").value,
+                    org: document.getElementById("colorOrg").value,
+                    title: document.getElementById("colorTitle").value,
+                    bio: document.getElementById("colorBio").value,
+                    contactBtnBg: document.getElementById("colorContactBtnBg").value,
+                    contactBtnText: document.getElementById("colorContactBtnText").value,
+                    utilBtnBg: document.getElementById("colorUtilBtnBg").value,
+                    utilBtnText: document.getElementById("colorUtilBtnText").value,
+                    primaryBtnBg: document.getElementById("colorPrimaryBtnBg").value,
+                    primaryBtnText: document.getElementById("colorPrimaryBtnText").value
+                }
+            });
+            cacheContactData(CONTACT_DATA);
+            renderUI();
+            profileImagePreviewBase64 = CONTACT_DATA.image || "";
+            logoImagePreviewBase64 = CONTACT_DATA.logo || "";
+            portfolioPreviewBase64 = CONTACT_DATA.portfolio || "";
+            if (isCloudSynced && firebaseClient) void saveProfileToCloud(CONTACT_DATA);
+            closeAdminModal();
+            showMessage("Changes saved.");
+        });
+
+        document.getElementById("resetProfileBtn").addEventListener("click", () => {
+            const confirmed = window.confirm("Reset Melat Wolde's card back to the original default profile?");
+            if (!confirmed) return;
+            CONTACT_DATA = normalizeContactData(DEFAULT_DATA);
+            cacheContactData(CONTACT_DATA);
+            renderUI();
+            populateDashboard();
+            if (isCloudSynced && firebaseClient) void saveProfileToCloud(CONTACT_DATA);
+            showMessage("Profile reset to default.");
+        });
+
+        document.getElementById("downloadButton").addEventListener("click", async () => {
+            const card = document.getElementById("id-card-content");
+            if (typeof window.html2canvas !== "function") {
+                showMessage("Image export is unavailable right now.", "error");
+                return;
+            }
+            showMessage("Generating image...");
+            try {
+                const canvas = await window.html2canvas(card, {
+                    scale: 3,
+                    useCORS: true,
+                    backgroundColor: CONTACT_DATA.colors.cardBg || "#010203"
+                });
+                const link = document.createElement("a");
+                link.href = canvas.toDataURL("image/png");
+                link.download = `${(CONTACT_DATA.name || "Melat_Wolde").replace(/\s+/g, "_")}_BusinessCard.png`;
+                link.click();
+            } catch (error) {
+                showMessage("Could not generate the image.", "error");
+            }
+        });
+
+        document.getElementById("vcfButton").addEventListener("click", () => {
+            let vcf = "BEGIN:VCARD\nVERSION:3.0\n";
+            vcf += `FN:${CONTACT_DATA.name}\n`;
+            if (CONTACT_DATA.organization) vcf += `ORG:${CONTACT_DATA.organization}\n`;
+            if (CONTACT_DATA.title) vcf += `TITLE:${CONTACT_DATA.title}\n`;
+            (CONTACT_DATA.phones || []).forEach((phone) => { vcf += `TEL;TYPE=CELL:${phone}\n`; });
+            (CONTACT_DATA.emails || []).forEach((email) => { vcf += `EMAIL:${email}\n`; });
+            if (CONTACT_DATA.website) vcf += `URL:${CONTACT_DATA.website}\n`;
+            vcf += "END:VCARD";
+            const blob = new Blob([vcf], { type: "text/vcard" });
+            const link = document.createElement("a");
             link.href = URL.createObjectURL(blob);
-            link.download = `Melat_Wolde.vcf`;
+            link.download = `${(CONTACT_DATA.name || "Melat_Wolde").replace(/\s+/g, "_")}.vcf`;
             link.click();
-            showMessage('VCF Created!');
+            showMessage("Contact file created.");
         });
 
-        renderPhones();
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                closeAdminModal();
+                closePortfolioModal();
+                closeQrModal();
+            }
+        });
+
+        if (isAdminSession()) applyAdminSession(true);
+        loadLocalData();
+        refreshIcons();
+        scheduleTask(initAuth);
     </script>
 </body>
 </html>
